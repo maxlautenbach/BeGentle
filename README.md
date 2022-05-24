@@ -1,4 +1,5 @@
 ##Recommended Plugins
+
 - Prettier
 - ESLint
 - Prisma
