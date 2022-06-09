@@ -26,6 +26,7 @@ model User {
   zahlungsinformationen String //tbd
   role                  Role     @default(CUSTOMER)
   rentals               Rental[]
+  shoppingCarts         ShoppingCart[]
 }
 
 model Address{
@@ -67,6 +68,15 @@ model InstrumentObject {
   rentals           Rental[]
 }
 
+model ShoppingCart {
+  id                Int      @id @default(autoincrement())
+  user              User @relation(fields: [userId], references: [id])
+  userId            Int
+  rentals           Rental[]
+  createdAt         DateTime
+  totalPrice        Float
+}
+
 model Review {
   id                  Int      @id @default(autoincrement())
   stars               Float
@@ -88,6 +98,8 @@ model Rental {
   points              Int
   review              Review?
   damage              Damage?
+  shoppingCart        ShoppingCart @relation(fields: [shoppingCartId], references: [id])
+  shoppingCartId      Int
 }
 
 model Damage {
