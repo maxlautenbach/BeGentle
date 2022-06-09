@@ -16,15 +16,16 @@ model Entry {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  lastname  String
-  firstname String
-  email     String   @unique
-  address   String //tbd Address?
-  password  String
-  punkte    Int
-  zahlungsinformationen String //Zahlungsinformationen
-  role      Role     @default(CUSTOMER)
+  id                    Int      @id @default(autoincrement())
+  lastname              String
+  firstname             String
+  email                 String   @unique
+  address               Address?
+  password              String
+  punkte                Int
+  zahlungsinformationen String //tbd
+  role                  Role     @default(CUSTOMER)
+  rentals               Rental[]
 }
 
 model Address{
@@ -33,17 +34,17 @@ model Address{
   number    Int
   postCode  Int
   city      String
+  user      User @relation(fields: [userId], references: [id])
+  userId    Int
 }
-
-//model Worker {
-//
-//}
 
 model Category {
   id              Int      @id @default(autoincrement())
   name            String
-  underCategories String //toBeDone
-  overCategory    String //toBeDone
+  underCategories Category[] @relation("CategoryHierachy")
+  overCategoryId  Int?
+  overCategory    Category? @relation("CategoryHierachy", fields: [overCategoryId], references: [id])
+  instrumentModel InstrumentModel[]
 }
 
 model InstrumentModel {
@@ -52,46 +53,50 @@ model InstrumentModel {
   model             String
   priceInMonth      Float
   description       String
-  review            String //tbd Review[]
-  instrumentObjects String //tbd InstrumentObject[]
-  instrumentTyp     String //tbd Category
+  //review            Review[]  kann aus InstrumentObjects aggregiert werden
+  instrumentObjects InstrumentObject[]
+  instrumentTyp     Category @relation(fields: [instrumentTypId], references: [id])
+  instrumentTypId   Int
 }
 
 model InstrumentObject {
   id                Int      @id @default(autoincrement())
-  damages           String //tbd Damage[]
   currentylRented   Boolean
-  review            String //tbd Review[]
+  model             InstrumentModel @relation(fields: [modelId], references: [id])
+  modelId           Int
+  rentals           Rental[]
 }
 
 model Review {
-  id                Int      @id @default(autoincrement())
-  stars             Float
-  description       String
-  user              String //tbd User
-  instrumentObject  String //tbd InstrumentObject
+  id                  Int      @id @default(autoincrement())
+  stars               Float
+  description         String
+  rental              Rental @relation(fields: [rentalId], references: [id])
+  rentalId            Int
 }
 
 model Rental {
-  id        Int      @id @default(autoincrement())
-  instrumentObject  String //tbd InstrumentObject
-  user              String //tbd User
-  bookedAt          DateTime
-  rentalStart       DateTime
-  rentalEnd         DateTime
-  rentalStatus      RentalStatus
-  points            Int
-  review            String //tbd Review
-  damages           String //tbd Damage[]
+  id                  Int      @id @default(autoincrement())
+  instrumentObject    InstrumentObject @relation(fields: [instrumentObjectId], references: [id])
+  instrumentObjectId  Int
+  user                User @relation(fields: [userId], references: [id])
+  userId              Int
+  bookedAt            DateTime
+  rentalStart         DateTime
+  rentalEnd           DateTime
+  rentalStatus        RentalStatus
+  points              Int
+  review              Review?
+  damage              Damage?
 }
 
 model Damage {
-  id                Int      @id @default(autoincrement())
-  description       String
-  type              String //vielleicht auch ENUM
-  costs             Float
-  instrumentObject  String //tbd InstrumentObject
-  user              String //tbd User
+  id                  Int      @id @default(autoincrement())
+  description         String
+  type                String //vielleicht auch ENUM
+  costs               Float
+  rental              Rental @relation(fields: [rentalId], references: [id])
+  rentalId            Int
 }
 enum Role {
   CUSTOMER
