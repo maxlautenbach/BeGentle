@@ -14,3 +14,94 @@ model Entry {
   id Int @id @default(autoincrement())
   name String
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  lastname  String
+  firstname String
+  email     String   @unique
+  address   String //tbd Address?
+  password  String
+  punkte    Int
+  zahlungsinformationen String //Zahlungsinformationen
+  role      Role     @default(CUSTOMER)
+}
+
+model Address{
+  id        Int      @id @default(autoincrement())
+  street    String
+  number    Int
+  postCode  Int
+  city      String
+}
+
+//model Worker {
+//
+//}
+
+model Category {
+  id              Int      @id @default(autoincrement())
+  name            String
+  underCategories String //toBeDone
+  overCategory    String //toBeDone
+}
+
+model InstrumentModel {
+  id                Int      @id @default(autoincrement())
+  name              String
+  model             String
+  priceInMonth      Float
+  description       String
+  review            String //tbd Review[]
+  instrumentObjects String //tbd InstrumentObject[]
+  instrumentTyp     String //tbd Category
+}
+
+model InstrumentObject {
+  id                Int      @id @default(autoincrement())
+  damages           String //tbd Damage[]
+  currentylRented   Boolean
+  review            String //tbd Review[]
+}
+
+model Review {
+  id                Int      @id @default(autoincrement())
+  stars             Float
+  description       String
+  user              String //tbd User
+  instrumentObject  String //tbd InstrumentObject
+}
+
+model Rental {
+  id        Int      @id @default(autoincrement())
+  instrumentObject  String //tbd InstrumentObject
+  user              String //tbd User
+  bookedAt          DateTime
+  rentalStart       DateTime
+  rentalEnd         DateTime
+  rentalStatus      RentalStatus
+  points            Int
+  review            String //tbd Review
+  damages           String //tbd Damage[]
+}
+
+model Damage {
+  id                Int      @id @default(autoincrement())
+  description       String
+  type              String //vielleicht auch ENUM
+  costs             Float
+  instrumentObject  String //tbd InstrumentObject
+  user              String //tbd User
+}
+enum Role {
+  CUSTOMER
+  WORKER
+}
+
+enum RentalStatus {
+  BOOKED
+  SHIPPED
+  DELIVERED
+  BACK
+  DELAYED
+}
