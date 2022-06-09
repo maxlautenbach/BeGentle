@@ -4,8 +4,8 @@ import { useState } from 'react'
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false)
   return (
-    <div className="sticky z-10 top-0 px-4 sm:px-6 py-3 bg-cl1 text-cl2 w-screen font-gabriela grid grid-cols-1 place-items-center">
-      <div className="w-11/12 lg:w-5/6 grid grid-cols-2">
+    <div className="sticky z-10 top-0 px-4 sm:px-6 py-3 bg-cl1 text-cl2 w-screen font-gabriela grid grid-cols-1 place-items-center drop-shadow-xl">
+      <div className="w-11/12 lg:w-5/6 max-w-7xl grid grid-cols-2">
         <div className="flex text-2xl lg:text-3xl h-12 w-full items-center justify-start">
           Be Gentle!
         </div>

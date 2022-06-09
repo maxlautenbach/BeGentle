@@ -2,11 +2,18 @@ import Head from 'next/head'
 import Header from '../components/header'
 import Image from 'next/image'
 import Link from 'next/link'
-import homepage_banner from '../images/homepage1.jpg'
+import Product from '../components/product'
+import Footer from '../components/footer'
 import { useState } from 'react'
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('')
+  const mockData = {
+    'id': 1,
+    'name': "Violini Stradivari",
+    'imageURL': "/instruments/violin1.png",
+    'price': 60
+  }
   return (
     <div>
       <Head>
@@ -15,14 +22,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div className="grid grid-cols-1 py-8 px-8 place-items-center">
+      <div className="grid grid-cols-1 pt-8 px-8 place-items-center">
         <div
-          className="h-max w-full bg-cover bg-center grid grid-cols-1 place-items-center border-solid border-b-4 border-b-cl2"
+          className="h-max w-screen bg-cover bg-center grid grid-cols-1 place-items-center border-solid border-b-4 border-b-cl2"
           id="Banner"
         >
+          
           <div className="-z-10 overflow-hidden h-max w-max bg-gradient-to-b from-black to-white bg-cover">
             <Image
-              src={homepage_banner}
+              src="/homepage1.jpg"
               alt=""
               layout="fill"
               className="-z-10"
@@ -31,8 +39,8 @@ export default function Home() {
             />
           </div>
 
-          <div className="z-1 text-left w-5/6 text-cl1">
-            <div className="text-7xl font-gabriela py-4">
+          <div className="z-1 text-left w-5/6 max-w-7xl text-cl1">
+            <div className="text-3xl xl:text-7xl lg:text-5xl font-gabriela py-4">
               Musik beginnt mit einem guten Instrument.
             </div>
             <div className="text-3xl py-2">
@@ -40,23 +48,89 @@ export default function Home() {
               Geige. Unverbindlich. Individuell. Wie für dich gemacht.
             </div>
           </div>
-          <div className="z-1 w-5/6 text-cl1 grid grid-cols-1 place-items-center py-16">
+          <div className="z-1 w-11/12 text-cl1 grid grid-cols-1 place-items-center py-16">
             <div>
               <input
-                className="h-14 w-[600px] pl-4 bg-cl4 border-solid border-r-0 border-2 border-cl1 rounded-l-xl text-xl outline-none"
+                className="h-14 xl:w-[600px] sm:w-[400px] w-full pl-4 bg-cl4 border-solid border-2 border-cl1 rounded-t-2xl sm:rounded-t-none sm:rounded-l-2xl text-xl outline-none"
                 type="text"
                 placeholder="Welches Instrument suchst du?"
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               <Link href={`/search?term=${searchTerm}`}>
-                <button className="bg-cl1 text-cl2 font-gabriela h-14 w-[200px] rounded-r-xl text-2xl">
+                <button className="bg-cl1 text-cl2 font-gabriela h-14 xl:w-[200px] sm:w-[150px] w-full rounded-b-2xl sm:rounded-b-none sm:rounded-r-2xl text-2xl">
                   Suchen
                 </button>
               </Link>
             </div>
           </div>
+          
+        </div>
+        <div className='w-screen bg-cl4 grid grid-cols-1 place-items-center' id='page-content'>
+          <div className='z-1 w-full bg-cl3 rounded-b-xl grid grid-cols-1 place-items-center drop-shadow-lg'>
+            <div className='w-5/6 max-w-7xl font-gabriela text-2xl text-cl1 py-4'>
+            Für dich nur das Beste! - unsere besten Instrumente
+            </div>
+            
+          </div>
+          <ul className='w-5/6 max-w-7xl grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 place-items-center py-8'>
+            <Product key='1'>{mockData}</Product>
+            <Product key='2'>{mockData}</Product>
+            <Product key='3'>{mockData}</Product>
+            <Product key='4'>{mockData}</Product>
+            <Product key='5'>{mockData}</Product>
+            <Product key='6'>{mockData}</Product>
+          </ul>
+          <div className='bg-cl3 w-screen grid grid-cols-1 place-items-center rounded-t-xl shadow-xl'>
+            <a className='xl:text-6xl sm:text-4xl text-2xl text-cl4 py-8'>Das ist das <a className='font-gabriela'>Be Gentle!</a> Konzept</a>
+            <div className='w-5/6 max-w-8xl h-max py-8 grid xl:grid-cols-3 grid-cols-1 place-items-center text-white'>
+              <div className='text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 xl:border-r-4 border-b-4 xl:border-b-0'>
+                <div className='w-28 py-4'>
+                <Image
+                  src='/icons/stopwatch.png'
+                  alt="Leider gibt es zu diesem Instrument kein Bild"
+                  width={200}
+                  height={200}
+                  layout="responsive"
+                  objectFit="contain"
+                />
+                </div>
+                <div className='xl:text-4xl text-2xl font-gabriela xl:h-36 xl:py-8 py-2 grid grid-cols-1 place-items-center'>Wir sind fix!</div>
+                <div className='pb-8'>Schneller gehts kaum. Sobald du bestellt hast bekommst du binnen 2 Tagen dein Wunschinstrument. Alternativ haben wir unseren unfassbar schnellen Be Gentle! Kurrier. Wenn der Schuh mal drückt ist er innerhalb von 2 Stunden bei dir.</div>
+              </div>
+              <div className='text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 border-b-4 xl:border-b-0 py-2 xl:py-0'>
+                <div className='w-28 py-4'>
+                <Image
+                  src='/icons/follower.png'
+                  alt="Leider gibt es zu diesem Instrument kein Bild"
+                  width={200}
+                  height={200}
+                  layout="responsive"
+                  objectFit="contain"
+                />
+                </div>
+                <div className='xl:text-4xl text-2xl font-gabriela xl:h-36 xl:py-8 py-2 grid grid-cols-1 place-items-center'>Wir lieben unsere Instrument!</div>
+                <div className='pb-8'>Deswegen wirst du nie ein Instrument bekommt was nicht aussieht wie geleckt. Besser gehts kaum. Wir haben unsere eigenen Standards gesetzen. Und unsere liebevollen Mitarbeiter übertreffen diese regelmäßig. Danke an der Stelle.</div>
+              </div>
+              <div className='text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 xl:border-l-4'>
+                <div className='w-28 py-4'>
+                <Image
+                  src='/icons/creditcard.png'
+                  alt="Leider gibt es zu diesem Instrument kein Bild"
+                  width={200}
+                  height={200}
+                  layout="responsive"
+                  objectFit="contain"
+                />
+                </div>
+                <div className='xl:text-4xl text-2xl font-gabriela xl:h-36 xl:py-8 py-2 grid grid-cols-1 place-items-center'>Du zahlst, wie es dir eben passt!</div>
+                <div className='pb-8'>Kreditkarte. PayPal. Apple Pay. Google Pay. Überweisung. Uns ist das schnutzpiep egal. Wir nehmen es eben so wie es kommt. Bei dir wird es mal knapp im Monat? Kein Problem wir passen uns dir an. Keine Sorge dein Instrument behältst du natürlich.</div>
+              </div>
+            </div>
+            <Footer />
+          </div>
         </div>
       </div>
+      
     </div>
   )
 }
