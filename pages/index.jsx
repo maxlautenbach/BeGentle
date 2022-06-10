@@ -81,9 +81,9 @@ export default function Home() {
             <Product key="6">{mockData}</Product>
           </ul>
           <div className="bg-cl3 w-screen grid grid-cols-1 place-items-center rounded-t-xl shadow-xl">
-            <a className="xl:text-6xl sm:text-4xl text-2xl text-cl4 py-8">
+            <div className="xl:text-6xl sm:text-4xl text-2xl text-cl4 py-8">
               Das ist das <a className="font-gabriela">Be Gentle!</a> Konzept
-            </a>
+            </div>
             <div className="w-5/6 max-w-8xl h-max py-8 grid xl:grid-cols-3 grid-cols-1 place-items-center text-white">
               <div className="text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 xl:border-r-4 border-b-4 xl:border-b-0">
                 <div className="w-28 py-4">
