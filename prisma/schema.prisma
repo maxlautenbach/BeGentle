@@ -52,8 +52,9 @@ model InstrumentModel {
   id                Int      @id @default(autoincrement())
   name              String
   model             String
+  imageURL          String
   priceInMonth      Float
-  description       String
+  description       String[]
   //review            Review[]  kann aus InstrumentObjects aggregiert werden
   instrumentObjects InstrumentObject[]
   instrumentTyp     Category @relation(fields: [instrumentTypId], references: [id])
