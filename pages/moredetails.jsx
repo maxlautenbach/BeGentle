@@ -3,6 +3,7 @@ import Footer from '../components/footer'
 import Header from '../components/header'
 import Head from 'next/head'
 import Link from 'next/link'
+import ReviewSVG from '../components/reviewSVG'
 
 
 const moredetails = () => {
@@ -16,19 +17,24 @@ const moredetails = () => {
         <Header />
             
         <div
-            className="w-screen bg-cl4 grid grid-cols-1 gap-0 place-items-center"
+            className="w-screen grid grid-cols-1 gap-0 place-items-center"
             id="page-content">
-                <div className="z-1 w-screen max-h-6 relative">
-                    <Image
-                        src={'/detailViolin.png'}
-                        alt="Hier ist ein Bild"
+
+            <div className="-z-10 overflow-hidden h-max w-max bg-gradient-to-b from-black to-white bg-cover">
+                        <Image
+                        src="/detailViolin.png"
+                        alt=""
                         layout="fill"
-                        className="-z-11"
+                        className="-z-10"
                         objectFit="cover"
-                        objectPosition="center"
-                    />
-            </div>
-                <div className="z-1 w-full bg-cl4 rounded-t-xl grid grid-cols-1  place-items-center" >
+                        objectpostion="center"
+                        />
+                    </div>
+
+                    <div className='min-h-screen h-screen flex flex-col'>
+                    <div className='h-1/2'></div>
+                    <div className="z-1 w-full h-max bg-cl4 rounded-t-xl grid grid-cols-1  place-items-center" >
+                    
                     <div className="w-5/6 max-w-7xl font-gabriela text-2xl text-cl1 py-4">
                         Violini Stradivari
                     </div>
@@ -114,11 +120,16 @@ const moredetails = () => {
                             <li>Ebenholzgriffbrett, Feinstimmer für die E-Saite, Aubert Steg Französisches Modell</li>
                         </ul>
                     </div>
+                    </div>
+                    
                 </div>
             </div>   
              <div className='bg-cl2 border-t-3 border-cl1 w-screen '>
                 <div className='w-5/6 max-w-7xl text-xl pl-8 pr-2'>
                     <p className='py-2 font-gabriela'>Unsere Kunden lieben dieses Instrument!</p>
+                    <div className='w-screen place-content-center'>
+                        <ReviewSVG/>
+                    </div>
                     <div className='text-cl5 pt-5 pb-1'>
                         <p className='text-lg font-gabriela'>{'"Klare Empfehlung, wunderbare Violine"'}</p>
                         <p className='text-xs '>- Andreas Genet</p>
@@ -135,6 +146,7 @@ const moredetails = () => {
                         <p className='text-lg font-gabriela'>{'"Paganini würde lächeln"'}</p>
                         <p className='text-xs'>- Manmuso</p>
                     </div>
+                    
                 </div>
                 
                 
