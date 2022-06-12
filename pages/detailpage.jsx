@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Footer from '../components/footer'
 import Header from '../components/header'
 import Head from 'next/head'
+import Link from 'next/link'
 
 
 const detailpage = () => {
@@ -66,17 +67,22 @@ const detailpage = () => {
                         </div>
                         <p className='text-cl4 text-center p-3'>Erlebe die Musik!</p>
                     </div>
-                    <p className='text-cl1 font-gabriela text-lg text-center pt-3'>Mehr Details</p>
-                    <div className="w-28">
-                        <Image
-                            src="/icons/dropdown.png"
-                            alt="Hier klicken für mehr Informationen"
-                            width={200}
-                            height={50}
-                            layout="responsive"
-                            objectFit="contain"
-                        />
-                    </div>
+                    <Link href="/moredetails">
+                        <div>
+                            <p className='text-cl1 font-gabriela text-lg text-center pt-3'>Mehr Details</p>
+                            <div className="w-28">
+                                <Image
+                                    src="/icons/dropdown.png"
+                                    alt="Hier klicken für mehr Informationen"
+                                    width={200}
+                                    height={50}
+                                    layout="responsive"
+                                    objectFit="contain"
+                                />
+                            </div>
+                        </div>
+                        
+                    </Link>
                 </div>
 
             <Footer />

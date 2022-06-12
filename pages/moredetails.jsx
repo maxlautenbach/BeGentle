@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Footer from '../components/footer'
 import Header from '../components/header'
 import Head from 'next/head'
+import Link from 'next/link'
 
 
 const moredetails = () => {
@@ -34,14 +35,24 @@ const moredetails = () => {
                     <div className="w-5/6 max-w-7xl text-sm text-cl1 py-0">
                         Scala Vilagrio R.O. Stradivari Avance Solo
                     </div>
-                    <div className="w-5/6 max-w-7xl font-gabriela text-2xl text-cl5 py-1">
-                        60,00€ im Monat
+                    <div className="w-5/6 max-w-7xl ">
+                        <span className='font-gabriela text-2xl text-cl5 py-1'>60,00€</span>
+                        <span className='text-xs text-cl1'> im Monat</span>
                     </div>
                     <div className="w-5/6 max-w-7xl text-xs text-cl1 py-1">
-                        <p>BeGentle! Care inklusive.</p>
-                        <p className='pt-0.5'>Spätestens in 2 Tagen bei dir.</p>
-                        <p className='pt-0.5'>Deine Basis für tolle Musik.</p>
-
+                        <p>
+                            <span>BeGentle! Care </span>
+                            <span className='text-cl5'>inklusive.</span>
+                        </p>
+                        <p className='pt-0.5'>
+                            <span>Spätestens in </span>
+                            <span className='text-cl5'>2 Tagen</span>
+                            <span> bei dir.</span>
+                        </p>
+                        <p className='pt-0.5'>
+                            <span>Deine Basis für </span>
+                            <span className='text-cl5'>tolle Musik.</span>
+                        </p>
                         <p className='pt-4'>Wähle deine Mindestlaufzeit</p>
                     </div>
                     <div className='z-1 w-5/6 max-w-7xl bg-cl1 rounded-xl place-items-center border-cl1 border-2 mb-3 mt-1'>
@@ -65,17 +76,22 @@ const moredetails = () => {
                         </div>
                         <p className='text-cl4 text-center p-3'>Erlebe die Musik!</p>
                     </div>
-                    <p className='text-cl1 font-gabriela text-lg text-center pt-3'>Mehr Details</p>
-                    <div className="w-28">
-                        <Image
-                            src="/icons/dropdown.png"
-                            alt="Hier klicken für mehr Informationen"
-                            width={200}
-                            height={50}
-                            layout="responsive"
-                            objectFit="contain"
-                        />
-                    </div>
+                    <Link href="/detailpage">
+                        <div>
+                            <p className='text-cl1 font-gabriela text-lg text-center pt-3'>Mehr Details</p>
+                            <div className="w-28">
+                                <Image
+                                    src="/icons/dropdown.png"
+                                    alt="Hier klicken für mehr Informationen"
+                                    width={200}
+                                    height={50}
+                                    layout="responsive"
+                                    objectFit="contain"
+                                />
+                            </div>
+                        </div>
+                    </Link>
+                    
                     <div className='w-screen grid grid-cols-2 text-center'>
                         <div className='bg-cl1 text-cl4 font-gabriela p-2'>
                             Violini Stradivari
