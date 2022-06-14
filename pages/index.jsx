@@ -6,14 +6,9 @@ import Product from '../components/product'
 import Footer from '../components/footer'
 import { useState } from 'react'
 
-export default function Home() {
+export default function Home({ props }) {
+  const listItems = props.map((item) => <Product key={item.id}>{item}</Product>)
   const [searchTerm, setSearchTerm] = useState('')
-  const mockData = {
-    id: 1,
-    name: 'Violini Stradivari',
-    imageURL: '/instruments/violin1.png',
-    price: 60,
-  }
   return (
     <div>
       <Head>
@@ -73,12 +68,7 @@ export default function Home() {
             </div>
           </div>
           <ul className="w-5/6 max-w-7xl grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 place-items-center py-8">
-            <Product key="1">{mockData}</Product>
-            <Product key="2">{mockData}</Product>
-            <Product key="3">{mockData}</Product>
-            <Product key="4">{mockData}</Product>
-            <Product key="5">{mockData}</Product>
-            <Product key="6">{mockData}</Product>
+            {listItems}
           </ul>
           <div className="bg-cl3 w-screen grid grid-cols-1 place-items-center rounded-t-xl shadow-xl">
             <div className="xl:text-6xl sm:text-4xl text-2xl text-cl4 py-8">
@@ -155,4 +145,15 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const res = await fetch('http://localhost:3000/api/search/recommended')
+  const data = await res.json()
+  console.log(data)
+  return {
+    props: {
+      props: data,
+    },
+  }
 }

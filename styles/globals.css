@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Gabriela';
-  src: local('Gabriela'), url(./fonts/Gabriela-Regular.ttf) format('truetype');
+    font-family: 'Gabriela';
+    src: local('Gabriela'), url(./fonts/Gabriela-Regular.ttf) format('truetype');
 }
 
 @tailwind base;
