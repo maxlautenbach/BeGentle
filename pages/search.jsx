@@ -8,17 +8,25 @@ import { useState } from 'react'
 
 export default function Home({ props, term }) {
   var searchResult
-  if(props.length != 0){
-    const listItems = props.map((item) => <Product key={item.id}>{item}</Product>)
+  if (props.length != 0) {
+    const listItems = props.map((item) => (
+      <Product key={item.id}>{item}</Product>
+    ))
     searchResult = (
       <ul className="w-5/6 max-w-7xl h-max grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 place-items-center py-8">
         {listItems}
         <li className="md:col-span-2 2xl:col-span-3 border-solid border-2 border-cl1 bg-cl2 rounded-xl w-5/6 grid grid-cols-1 place-items-center">
-          <a className='w-5/6 py-6 text-2xl font-gabriela text-cl1 text-center'>Das darf doch nicht wahr sein. Mehr haben wir leider nicht.</a>
-          <p className='w-4/6 text-center font-gabriela'>Wir suchen unsere Instrumente liebevoll aus. Bei uns gilt Klasse statt Masse. Aber vielleicht findest du etwas bei den anderen Instrumenten.</p>
+          <a className="w-5/6 py-6 text-2xl font-gabriela text-cl1 text-center">
+            Das darf doch nicht wahr sein. Mehr haben wir leider nicht.
+          </a>
+          <p className="w-4/6 text-center font-gabriela">
+            Wir suchen unsere Instrumente liebevoll aus. Bei uns gilt Klasse
+            statt Masse. Aber vielleicht findest du etwas bei den anderen
+            Instrumenten.
+          </p>
           <div className="h-[170px] py-10 w-full grid grid-cols-1 rounded-xl place-content-center overflow-hidden">
             <Image
-              src='/icons/sad.png'
+              src="/icons/sad.png"
               alt="Leider gibt es zu diesem Instrument kein Bild"
               width={4000}
               height={4000}
@@ -34,11 +42,17 @@ export default function Home({ props, term }) {
     searchResult = (
       <ul className="w-5/6 max-w-7xl h-max grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 place-items-center py-8">
         <li className="md:col-span-2 2xl:col-span-3 border-solid border-2 border-cl1 bg-cl2 rounded-xl w-5/6 grid grid-cols-1 place-items-center">
-          <a className='w-5/6 py-6 text-2xl font-gabriela text-cl1 text-center'>Das darf doch nicht wahr sein. Wir haben nicht was du suchst.</a>
-          <p className='w-4/6 text-center font-gabriela'>Wir suchen unsere Instrumente liebevoll aus. Bei uns gilt Klasse statt Masse. Aber vielleicht findest du etwas bei den anderen Instrumenten.</p>
+          <a className="w-5/6 py-6 text-2xl font-gabriela text-cl1 text-center">
+            Das darf doch nicht wahr sein. Wir haben nicht was du suchst.
+          </a>
+          <p className="w-4/6 text-center font-gabriela">
+            Wir suchen unsere Instrumente liebevoll aus. Bei uns gilt Klasse
+            statt Masse. Aber vielleicht findest du etwas bei den anderen
+            Instrumenten.
+          </p>
           <div className="h-[170px] py-10 w-full grid grid-cols-1 rounded-xl place-content-center overflow-hidden">
             <Image
-              src='/icons/sad.png'
+              src="/icons/sad.png"
               alt="Leider gibt es zu diesem Instrument kein Bild"
               width={4000}
               height={4000}
@@ -51,7 +65,7 @@ export default function Home({ props, term }) {
       </ul>
     )
   }
-  
+
   const [searchTerm, setSearchTerm] = useState(term)
   return (
     <div>
