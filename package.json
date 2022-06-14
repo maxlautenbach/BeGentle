@@ -1,30 +1,30 @@
 {
-    "name": "begentle",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
-        "lint": "next lint",
-        "seed": "node prisma/seed.js",
-        "reset": "prisma migrate reset && node prisma/seed.js"
-    },
-    "dependencies": {
-        "@prisma/client": "^3.14.0",
-        "autoprefixer": "^10.4.7",
-        "next": "12.1.6",
-        "postcss": "^8.4.14",
-        "react": "18.1.0",
-        "react-dom": "18.1.0",
-        "tailwindcss": "^3.0.24"
-    },
-    "devDependencies": {
-        "eslint": "8.16.0",
-        "eslint-config-next": "12.1.6",
-        "eslint-config-prettier": "^8.5.0",
-        "husky": "^8.0.1",
-        "prettier": "^2.6.2",
-        "prisma": "^3.14.0"
-    }
+  "name": "begentle",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seed": "node prisma/seed.js",
+    "reset": "prisma migrate reset && node prisma/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.14.0",
+    "autoprefixer": "^10.4.7",
+    "next": "12.1.6",
+    "postcss": "^8.4.14",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "tailwindcss": "^3.0.24"
+  },
+  "devDependencies": {
+    "eslint": "8.16.0",
+    "eslint-config-next": "12.1.6",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
+    "prettier": "^2.6.2",
+    "prisma": "^3.14.0"
+  }
 }
