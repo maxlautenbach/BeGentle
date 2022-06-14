@@ -7,7 +7,6 @@ function Product(props) {
       <div className="bg-cl1 rounded-2xl relative overflow-hidden xl:w-[370px] w-[300px] drop-shadow-2xl">
         <div className="z-10 absolute bg-cl3 right-0 text-center font-gabriela text-cl1 xl:w-32 xl:h-32 w-24 h-24 grid grid-cols-1 place-content-center rounded-b-2xl">
           <a className="text-base">ab</a>
-
           <a className="xl:text-4xl text-3xl">{props.children.priceInMonth}€</a>
           <a className="text-base">im Monat</a>
         </div>
