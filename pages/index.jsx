@@ -6,14 +6,9 @@ import Product from '../components/product'
 import Footer from '../components/footer'
 import { useState } from 'react'
 
-export default function Home() {
+export default function Home({ props }) {
+  const listItems = props.map((item) => <Product key={item.id}>{item}</Product>)
   const [searchTerm, setSearchTerm] = useState('')
-  const mockData = {
-    id: 1,
-    name: 'Violini Stradivari',
-    imageURL: '/instruments/violin1.png',
-    price: 60,
-  }
   return (
     <div>
       <Head>
@@ -72,20 +67,15 @@ export default function Home() {
               Für dich nur das Beste! - unsere besten Instrumente
             </div>
           </div>
-          <ul className="w-5/6 max-w-7xl grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 place-items-center py-8">
-            <Product key="1">{mockData}</Product>
-            <Product key="2">{mockData}</Product>
-            <Product key="3">{mockData}</Product>
-            <Product key="4">{mockData}</Product>
-            <Product key="5">{mockData}</Product>
-            <Product key="6">{mockData}</Product>
+          <ul className="w-5/6 max-w-7xl grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 place-items-center py-8">
+            {listItems}
           </ul>
           <div className="bg-cl3 w-screen grid grid-cols-1 place-items-center rounded-t-xl shadow-xl">
             <div className="xl:text-6xl sm:text-4xl text-2xl text-cl4 py-8">
               Das ist das <a className="font-gabriela">Be Gentle!</a> Konzept
             </div>
-            <div className="w-5/6 max-w-8xl h-max py-8 grid xl:grid-cols-3 grid-cols-1 place-items-center text-white">
-              <div className="text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 xl:border-r-4 border-b-4 xl:border-b-0">
+            <div className="w-5/6 max-w-8xl h-max py-8 grid 2xl:grid-cols-3 grid-cols-1 place-items-center text-white">
+              <div className="text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 2xl:border-r-4 border-b-4 2xl:border-b-0">
                 <div className="w-28 py-4">
                   <Image
                     src="/icons/stopwatch.png"
@@ -96,7 +86,7 @@ export default function Home() {
                     objectFit="contain"
                   />
                 </div>
-                <div className="xl:text-4xl text-2xl font-gabriela xl:h-36 xl:py-8 py-2 grid grid-cols-1 place-items-center">
+                <div className="xl:text-4xl text-2xl font-gabriela 2xl:h-36 xl:py-8 py-2 grid grid-cols-1 place-items-center">
                   Wir sind fix!
                 </div>
                 <div className="pb-8">
@@ -106,7 +96,7 @@ export default function Home() {
                   mal drückt ist er innerhalb von 2 Stunden bei dir.
                 </div>
               </div>
-              <div className="text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 border-b-4 xl:border-b-0 py-2 xl:py-0">
+              <div className="text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 border-b-4 2xl:border-b-0 py-2 2xl:py-0">
                 <div className="w-28 py-4">
                   <Image
                     src="/icons/follower.png"
@@ -117,7 +107,7 @@ export default function Home() {
                     objectFit="contain"
                   />
                 </div>
-                <div className="xl:text-4xl text-2xl font-gabriela xl:h-36 xl:py-8 py-2 grid grid-cols-1 place-items-center">
+                <div className="xl:text-4xl text-2xl font-gabriela 2xl:h-36 xl:py-8 py-2 grid grid-cols-1 place-items-center">
                   Wir lieben unsere Instrument!
                 </div>
                 <div className="pb-8">
@@ -127,7 +117,7 @@ export default function Home() {
                   übertreffen diese regelmäßig. Danke an der Stelle.
                 </div>
               </div>
-              <div className="text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 xl:border-l-4">
+              <div className="text-center grid grid-cols-1 place-items-center px-4 border-solid border-cl4 2xl:border-l-4">
                 <div className="w-28 py-4">
                   <Image
                     src="/icons/creditcard.png"
@@ -138,7 +128,7 @@ export default function Home() {
                     objectFit="contain"
                   />
                 </div>
-                <div className="xl:text-4xl text-2xl font-gabriela xl:h-36 xl:py-8 py-2 grid grid-cols-1 place-items-center">
+                <div className="xl:text-4xl text-2xl font-gabriela 2xl:h-36 xl:py-8 py-2 grid grid-cols-1 place-items-center">
                   Du zahlst, wie es dir eben passt!
                 </div>
                 <div className="pb-8">
@@ -155,4 +145,15 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const res = await fetch('http://localhost:3000/api/search/recommended')
+  const data = await res.json()
+  console.log(data)
+  return {
+    props: {
+      props: data,
+    },
+  }
 }

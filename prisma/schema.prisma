@@ -11,105 +11,109 @@ datasource db {
 }
 
 model Entry {
-  id Int @id @default(autoincrement())
+  id   Int    @id @default(autoincrement())
   name String
 }
 
 model User {
-  id                    Int      @id @default(autoincrement())
+  id                    Int            @id @default(autoincrement())
   lastname              String
   firstname             String
-  email                 String   @unique
+  email                 String         @unique
   address               Address?
   password              String
   punkte                Int
   zahlungsinformationen String //tbd
-  role                  Role     @default(CUSTOMER)
+  role                  Role           @default(CUSTOMER)
   rentals               Rental[]
   shoppingCarts         ShoppingCart[]
 }
 
-model Address{
-  id        Int      @id @default(autoincrement())
-  street    String
-  number    Int
-  postCode  Int
-  city      String
-  user      User @relation(fields: [userId], references: [id])
-  userId    Int
+model Address {
+  id       Int    @id @default(autoincrement())
+  street   String
+  number   Int
+  postCode Int
+  city     String
+  user     User   @relation(fields: [userId], references: [id])
+  userId   Int    @unique
 }
 
 model Category {
-  id              Int      @id @default(autoincrement())
+  id              Int               @id @default(autoincrement())
   name            String
-  underCategories Category[] @relation("CategoryHierachy")
+  underCategories Category[]        @relation("CategoryHierachy")
   overCategoryId  Int?
-  overCategory    Category? @relation("CategoryHierachy", fields: [overCategoryId], references: [id])
+  overCategory    Category?         @relation("CategoryHierachy", fields: [overCategoryId], references: [id])
   instrumentModel InstrumentModel[]
 }
 
 model InstrumentModel {
-  id                Int      @id @default(autoincrement())
+  id                Int                @id @default(autoincrement())
   name              String
   model             String
+  imageURL          String
   priceInMonth      Float
-  description       String
+  description       String[]
   //review            Review[]  kann aus InstrumentObjects aggregiert werden
   instrumentObjects InstrumentObject[]
-  instrumentTyp     Category @relation(fields: [instrumentTypId], references: [id])
+  instrumentTyp     Category           @relation(fields: [instrumentTypId], references: [id])
   instrumentTypId   Int
+  isRecommended     Boolean            @default(false)
+  isAvailable       Boolean            @default(true)
 }
 
 model InstrumentObject {
-  id                Int      @id @default(autoincrement())
-  currentylRented   Boolean
-  model             InstrumentModel @relation(fields: [modelId], references: [id])
-  modelId           Int
-  rentals           Rental[]
+  id              Int             @id @default(autoincrement())
+  currentylRented Boolean
+  model           InstrumentModel @relation(fields: [modelId], references: [id])
+  modelId         Int
+  rentals         Rental[]
 }
 
 model ShoppingCart {
-  id                Int      @id @default(autoincrement())
-  user              User @relation(fields: [userId], references: [id])
-  userId            Int
-  rentals           Rental[]
-  createdAt         DateTime
-  totalPrice        Float
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  rentals    Rental[]
+  createdAt  DateTime
+  totalPrice Float
 }
 
 model Review {
-  id                  Int      @id @default(autoincrement())
-  stars               Float
-  description         String
-  rental              Rental @relation(fields: [rentalId], references: [id])
-  rentalId            Int
+  id          Int    @id @default(autoincrement())
+  stars       Float
+  description String
+  rental      Rental @relation(fields: [rentalId], references: [id])
+  rentalId    Int    @unique
 }
 
 model Rental {
-  id                  Int      @id @default(autoincrement())
-  instrumentObject    InstrumentObject @relation(fields: [instrumentObjectId], references: [id])
-  instrumentObjectId  Int
-  user                User @relation(fields: [userId], references: [id])
-  userId              Int
-  bookedAt            DateTime
-  rentalStart         DateTime
-  rentalEnd           DateTime
-  rentalStatus        RentalStatus
-  points              Int
-  review              Review?
-  damage              Damage?
-  shoppingCart        ShoppingCart @relation(fields: [shoppingCartId], references: [id])
-  shoppingCartId      Int
+  id                 Int              @id @default(autoincrement())
+  instrumentObject   InstrumentObject @relation(fields: [instrumentObjectId], references: [id])
+  instrumentObjectId Int
+  user               User             @relation(fields: [userId], references: [id])
+  userId             Int
+  bookedAt           DateTime
+  rentalStart        DateTime
+  rentalEnd          DateTime
+  rentalStatus       RentalStatus
+  points             Int
+  review             Review?
+  damage             Damage?
+  shoppingCart       ShoppingCart     @relation(fields: [shoppingCartId], references: [id])
+  shoppingCartId     Int
 }
 
 model Damage {
-  id                  Int      @id @default(autoincrement())
-  description         String
-  type                String //vielleicht auch ENUM
-  costs               Float
-  rental              Rental @relation(fields: [rentalId], references: [id])
-  rentalId            Int
+  id          Int    @id @default(autoincrement())
+  description String
+  type        String //vielleicht auch ENUM
+  costs       Float
+  rental      Rental @relation(fields: [rentalId], references: [id])
+  rentalId    Int    @unique
 }
+
 enum Role {
   CUSTOMER
   WORKER
