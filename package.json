@@ -20,6 +20,7 @@
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.2.1",
     "eslint": "8.16.0",
     "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "^8.5.0",
