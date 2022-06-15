@@ -3,8 +3,6 @@ import * as React from 'react'
 function SvgComponent(props) {
   return (
     <svg
-      width="50mm"
-      height="50mm"
       viewBox="0 0 150.18929 150.18308"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
