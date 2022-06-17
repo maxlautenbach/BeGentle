@@ -24,7 +24,7 @@ function Product(props) {
         <div className="flex xl:px-8 px-4 py-5 text-center font-gabriela h-32 items-center">
           <div className="w-1/2 text-cl2 text-lg">{props.children.name}</div>
           <div className="w-1/2 flex justify-end items-center">
-            <Link href={'/instrument/'+props.children.id}>
+            <Link href={'/instrument/' + props.children.id}>
               <button className="w-32 text-base text-cl1 bg-cl3 py-1 h-max rounded-3xl">
                 Details
               </button>
