@@ -18,13 +18,15 @@ model Entry {
 
 model User {
   id                    Int            @id @default(autoincrement())
-  lastname              String
-  firstname             String
-  email                 String         @unique
+  status                UserStatus
+  lastActivity          DateTime       @default(now())
+  lastname              String?
+  firstname             String?
+  email                 String?         @unique
   address               Address?
-  password              String
-  punkte                Int
-  zahlungsinformationen String //tbd
+  password              String?
+  punkte                Int?
+  zahlungsinformationen String? //tbd
   role                  Role           @default(CUSTOMER)
   rentals               Rental[]
   shoppingCarts         ShoppingCart[]
@@ -126,4 +128,9 @@ enum RentalStatus {
   DELIVERED
   BACK
   DELAYED
+}
+
+enum UserStatus {
+  TEMP
+  ACTIVE
 }

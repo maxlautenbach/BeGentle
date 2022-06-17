@@ -1,8 +1,39 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import { useCookies } from 'react-cookie'
+
+async function createTempUser() {
+  const res = await fetch(`http://localhost:3000/api/login/createUser`, {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify({
+      status: 'TEMP',
+    }),
+  })
+  const data = await res.json()
+  return data
+}
+
+async function checkUserID(cookies, setCookie) {
+  if (typeof cookies.userid == 'undefined') {
+    const data = await createTempUser()
+    setCookie('userid', data.userid)
+  } else {
+    const res = await fetch(
+      `http://localhost:3000/api/login/checkUser/${cookies.userid}`
+    )
+    const data = await res.json()
+    if (data.message != 'Successful') {
+      const data = await createTempUser()
+      setCookie('userid', data.userid)
+    }
+  }
+}
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false)
+  const [cookies, setCookie] = useCookies(['cookies'])
+  checkUserID(cookies, setCookie)
   return (
     <div className="sticky z-10 top-0 px-4 sm:px-6 py-3 bg-cl1 text-cl2 w-screen font-gabriela grid grid-cols-1 place-items-center drop-shadow-xl">
       <div className="w-11/12 lg:w-5/6 max-w-7xl grid grid-cols-2">

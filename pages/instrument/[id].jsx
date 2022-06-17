@@ -5,6 +5,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import ReviewSVG from '../../components/reviewSVG'
 
+
+
 export default function Home ({ instrument }) {
     const listItems = instrument.description.map( (description, index) => <li key={index}>{description}</li>)
     return (
@@ -22,7 +24,7 @@ export default function Home ({ instrument }) {
             <div className="w-full h-screen flex flex-col">
               <Header />
               <div className="w-full flex-grow">
-                <div className="-z-10 overflow-hidden h-max w-max bg-gradient-to-b from-black to-white bg-cover">
+                <div className="-z-10 overflow-hidden h-max w-max bg-gradient-to-b from-black to-white bg-cover pointer-events-none">
                   <Image
                     src="/detailViolin.png"
                     alt=""
@@ -84,9 +86,9 @@ export default function Home ({ instrument }) {
                       <p className="text-xs font-light">Monate</p>
                     </div>
                   </div>
-                  <Link href={'/warenkorb'}>
-                    <p className="text-cl4 text-center p-3">Jetzt ausleihen!</p>
-                  </Link>
+                  <button className='w-full'>
+                    <p className="text-cl4 text-center p-3 hover:bg-cl6 hover:text-cl1 rounded-b-xl transition ease-in-out">Jetzt ausleihen!</p>
+                  </button>
                 </div>
                 <Link href="#Description" scroll={true}>
                   <div>
