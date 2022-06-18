@@ -1,5 +1,6 @@
 import Header from '../components/header'
 import Footer from '../components/footer'
+import Cartitem from '../components/cartitem'
 import { useCookies } from 'react-cookie'
 import { useEffect, useState } from 'react'
 
@@ -7,12 +8,13 @@ export default function Shoppingcart() {
   const [cookies] = useCookies(['cookies'])
   const cartid = cookies.cartid
   const [data, setData] = useState({ id: 1 })
-
+    const [rentals, setRentals] = useState(<li></li>)
   useEffect(() => {
     fetch('/api/rental/getCart?cartid=' + cartid)
       .then((res) => res.json())
       .then((data) => {
         setData(data)
+        setRentals(data.rentals.map((item) => (<Cartitem key={item.id}>{item}</Cartitem>)))
       })
   }, [])
   return (
@@ -25,7 +27,9 @@ export default function Shoppingcart() {
               <div className="font-gabriela text-3xl">
                 Deine überaus sehr gute Wahl
               </div>
-              <ul></ul>
+              <ul>
+                {rentals}
+              </ul>
             </div>
           </div>
           <div className="bg-cl6 w-4/12">
