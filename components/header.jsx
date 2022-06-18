@@ -14,18 +14,23 @@ async function createTempUser() {
   return data
 }
 
+
+
 async function checkUserID(cookies, setCookie) {
   if (typeof cookies.userid == 'undefined') {
-    const data = await createTempUser()
-    setCookie('userid', data.userid)
+    const userdata = await createTempUser()
+    setCookie('userid', userdata.userid)
+    setCookie('cartid', userdata.cartid)
   } else {
     const res = await fetch(
       `http://localhost:3000/api/login/checkUser/${cookies.userid}`
     )
     const data = await res.json()
+    
     if (data.message != 'Successful') {
-      const data = await createTempUser()
-      setCookie('userid', data.userid)
+      const userdata = await createTempUser()
+      setCookie('userid', userdata.userid)
+      setCookie('cartid', userdata.cartid)
     }
   }
 }

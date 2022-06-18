@@ -4,11 +4,33 @@ import Header from '../../components/header'
 import Head from 'next/head'
 import Link from 'next/link'
 import ReviewSVG from '../../components/reviewSVG'
+import { useRouter } from 'next/router'
+import { useCookies } from 'react-cookie'
 
-export default function Home({ instrument }) {
+export default function DetailPage({ instrument }) {
+  const router = useRouter()
   const listItems = instrument.description.map((description, index) => (
     <li key={index}>{description}</li>
   ))
+  const [cookies] = useCookies(['cookies'])
+  async function onClick(){
+    const body ={
+      userid: cookies.userid,
+      cartid: cookies.cartid,
+      instrumentId: instrument.id,
+      duration: 1,
+    }
+    const res = await fetch(`http://localhost:3000/api/rental/addToCart`, {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify(body),
+  })
+    const data = await res.json()
+    if(data.message == "Successful"){
+      router.push('/shoppingcart')
+    }
+  }
+
   return (
     <div>
       <Head>
@@ -86,7 +108,7 @@ export default function Home({ instrument }) {
                   <p className="text-xs font-light">Monate</p>
                 </div>
               </div>
-              <button className="w-full">
+              <button className="w-full" onClick={onClick}>
                 <p className="text-cl4 text-center p-3 hover:bg-cl6 hover:text-cl1 rounded-b-xl transition ease-in-out">
                   Jetzt ausleihen!
                 </p>
