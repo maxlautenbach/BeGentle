@@ -14,8 +14,6 @@ async function createTempUser() {
   return data
 }
 
-
-
 async function checkUserID(cookies, setCookie) {
   if (typeof cookies.userid == 'undefined') {
     const userdata = await createTempUser()
@@ -26,7 +24,7 @@ async function checkUserID(cookies, setCookie) {
       `http://localhost:3000/api/login/checkUser/${cookies.userid}`
     )
     const data = await res.json()
-    
+
     if (data.message != 'Successful') {
       const userdata = await createTempUser()
       setCookie('userid', userdata.userid)

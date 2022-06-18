@@ -13,20 +13,20 @@ export default function DetailPage({ instrument }) {
     <li key={index}>{description}</li>
   ))
   const [cookies] = useCookies(['cookies'])
-  async function onClick(){
-    const body ={
+  async function onClick() {
+    const body = {
       userid: cookies.userid,
       cartid: cookies.cartid,
       instrumentId: instrument.id,
       duration: 1,
     }
     const res = await fetch(`http://localhost:3000/api/rental/addToCart`, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(body),
-  })
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(body),
+    })
     const data = await res.json()
-    if(data.message == "Successful"){
+    if (data.message == 'Successful') {
       router.push('/shoppingcart')
     }
   }

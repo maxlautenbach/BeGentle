@@ -25,14 +25,12 @@ export default function Shoppingcart() {
               <div className="font-gabriela text-3xl">
                 Deine überaus sehr gute Wahl
               </div>
-              <ul>
-                
-              </ul>
+              <ul></ul>
             </div>
           </div>
           <div className="bg-cl6 w-4/12">
             <div className="px-8 py-8 h-full text-cl4 grid grid-cols-1 place-items-center">
-              <div className='w-full'>
+              <div className="w-full">
                 <div className="font-gabriela text-3xl text-center w-full">
                   Registrierter Kunde
                 </div>
