@@ -171,7 +171,9 @@ export default function Step1() {
             <div className="grid grid-cols-2 text-cl2">
               <a className="font-light text-right pr-4 w-full">Produkte:</a>
               <a className="font-light text-right w-max">60.00€</a>
-              <a className="font-light text-right pr-4 w-full">Zusatzprodukte:</a>
+              <a className="font-light text-right pr-4 w-full">
+                Zusatzprodukte:
+              </a>
               <a className="font-light text-right w-max">60.00€</a>
               <a className="font-light text-right pr-4 w-full">Versand:</a>
               <a className="font-light text-right w-max">60.00€</a>
