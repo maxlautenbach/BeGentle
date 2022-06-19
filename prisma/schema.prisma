@@ -25,7 +25,7 @@ model User {
   email                 String?        @unique
   address               Address?
   password              String?
-  punkte                Int?
+  punkte                Int            @default(0)
   zahlungsinformationen String? //tbd
   role                  Role           @default(CUSTOMER)
   rentals               Rental[]
@@ -80,10 +80,10 @@ model ShoppingCart {
   userId      Int
   rentals     Rental[]
   createdAt   DateTime @default(now())
-  rentalPrice Float @default(0.00)
-  shippingFee Float @default(4.99)
-  extraFee    Float @default(0.00)
-  totalPrice  Float @default(4.99)
+  rentalPrice Float    @default(0.00)
+  shippingFee Float    @default(4.99)
+  extraFee    Float    @default(0.00)
+  totalPrice  Float    @default(4.99)
 }
 
 model Review {

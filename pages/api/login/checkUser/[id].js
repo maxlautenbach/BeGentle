@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         lastActivity: new Date(),
       },
     })
-    res.status(200).json({ message: 'Successful' })
+    res.status(200).json({ message: 'Successful', status: user.status })
   } else {
     res.status(404).json({ message: 'User not found' })
   }

@@ -3,6 +3,8 @@ import Footer from '../components/footer'
 import Cartitem from '../components/cartitem'
 import { useCookies } from 'react-cookie'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import Router from 'next/router'
 
 export default function Shoppingcart() {
   const [cookies] = useCookies(['cookies'])
@@ -19,6 +21,18 @@ export default function Shoppingcart() {
         )
       })
   }, [])
+  async function onClick(){
+    const res = await fetch(
+      `http://localhost:3000/api/login/checkUser/${cookies.userid}`
+    )
+    const data = await res.json()
+    if(data.status == "ACTIVE"){
+      Router.push("http://localhost:3000/payment/step1")
+    } else {
+      Router.push("http://localhost:3000/login")
+    }
+    
+  }
   return (
     <div>
       <div className="w-screen h-screen bg-cl2 flex flex-col">
@@ -46,45 +60,13 @@ export default function Shoppingcart() {
                     <a className="text-cl5 text-sm">{data.rentalPrice}.00€</a>
                   </div>
                   <div className="col-span-2 bg-cl2 font-gabriela w-full rounded-lg h-8">
-                    <button className="text-black text-center w-full h-full">
-                      Jetzt Mieten!
-                    </button>
+
+                      <button className="text-black text-center w-full h-full" onClick={onClick}>
+                        Jetzt Mieten!
+                      </button>
+
                   </div>
                   <div className="pt-4" />
-                </div>
-              </div>
-            </div>
-            <div className="bg-cl6 2xl:w-4/12 hidden" id="login">
-              <div className="px-8 py-8 h-full text-cl4 grid grid-cols-1 place-items-center">
-                <div className="w-full">
-                  <div className="font-gabriela text-3xl text-center w-full">
-                    Registrierter Kunde
-                  </div>
-                  <div className="pl-4 pt-4 pb-1 font-light">
-                    E-Mail/Kundennummer:
-                  </div>
-                  <input
-                    className="w-full h-12 rounded-xl bg-cl4 drop-shadow-xl text-black px-4 text-xl focus:bg-cl2 transition ease-in-out outline-none"
-                    type="text"
-                  ></input>
-                  <div className="pl-4 pt-2 pb-1 font-light">Passwort:</div>
-                  <input
-                    className="w-full h-12 rounded-xl bg-cl4 drop-shadow-xl text-black px-4 text-2xl focus:bg-cl2 transition ease-in-out outline-none"
-                    type="password"
-                  ></input>
-                  <div className="py-4" />
-                  <button className="w-full h-12 text-cl4 bg-cl1 rounded-xl font-light text-xl">
-                    Einloggen
-                  </button>
-                  <div className="py-2 border-b-2 border-solid border-cl2" />
-                  <div className="py-2" />
-                  <button className="w-full h-12 text-cl4 bg-cl1 rounded-xl font-light text-xl">
-                    Registrieren
-                  </button>
-                  <div className="py-2" />
-                  <button className="w-full h-12 text-cl1 border-solid border-2 border-cl1 rounded-xl font-light text-xl">
-                    Als Gast Bestellen
-                  </button>
                 </div>
               </div>
             </div>
