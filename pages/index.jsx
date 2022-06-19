@@ -150,7 +150,6 @@ export default function Home({ props }) {
 export async function getServerSideProps() {
   const res = await fetch('http://localhost:3000/api/search/recommended')
   const data = await res.json()
-  console.log(data)
   return {
     props: {
       props: data,

@@ -123,7 +123,6 @@ export async function getServerSideProps(context) {
   } else {
     data = await res.json()
   }
-  console.log(data)
   return {
     props: {
       props: data,

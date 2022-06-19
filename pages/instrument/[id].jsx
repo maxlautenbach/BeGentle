@@ -18,6 +18,7 @@ export default function DetailPage({ instrument }) {
       userid: cookies.userid,
       cartid: cookies.cartid,
       instrumentId: instrument.id,
+      price: instrument.priceInMonth,
       duration: 1,
     }
     const res = await fetch(`http://localhost:3000/api/rental/addToCart`, {
