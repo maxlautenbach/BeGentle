@@ -290,6 +290,39 @@ const InstrumentModelData = [
   },
 ]
 
+const InstrumentObjectData = [
+  {
+    modelId: 1,
+  },
+  {
+    modelId: 2,
+  },
+  {
+    modelId: 3,
+  },
+  {
+    modelId: 4,
+  },
+  {
+    modelId: 5,
+  },
+  {
+    modelId: 6,
+  },
+  {
+    modelId: 7,
+  },
+  {
+    modelId: 8,
+  },
+  {
+    modelId: 9,
+  },
+  {
+    modelId: 10,
+  },
+]
+
 const CategoryData = [
   {
     name: 'Streichinstrumente',
@@ -327,6 +360,12 @@ async function main() {
       data: data,
     })
     console.log(`Created instrument model with id: ${InstrumentModel.id}`)
+  }
+  for (const data of InstrumentObjectData) {
+    const instrumentObject = await prisma.instrumentObject.create({
+      data: data,
+    })
+    console.log(`Created instrument object with id: ${instrumentObject.id}`)
   }
   console.log(`Seeding finished.`)
 }

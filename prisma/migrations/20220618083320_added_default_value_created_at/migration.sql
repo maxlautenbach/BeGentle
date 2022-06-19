@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "ShoppingCart" ALTER COLUMN "createdAt" SET DEFAULT CURRENT_TIMESTAMP;

@@ -18,13 +18,15 @@ model Entry {
 
 model User {
   id                    Int            @id @default(autoincrement())
-  lastname              String
-  firstname             String
-  email                 String         @unique
+  status                UserStatus
+  lastActivity          DateTime       @default(now())
+  lastname              String?
+  firstname             String?
+  email                 String?        @unique
   address               Address?
-  password              String
-  punkte                Int
-  zahlungsinformationen String //tbd
+  password              String?
+  punkte                Int?
+  zahlungsinformationen String? //tbd
   role                  Role           @default(CUSTOMER)
   rentals               Rental[]
   shoppingCarts         ShoppingCart[]
@@ -66,19 +68,22 @@ model InstrumentModel {
 
 model InstrumentObject {
   id              Int             @id @default(autoincrement())
-  currentylRented Boolean
+  currentlyRented Boolean         @default(false)
   model           InstrumentModel @relation(fields: [modelId], references: [id])
   modelId         Int
   rentals         Rental[]
 }
 
 model ShoppingCart {
-  id         Int      @id @default(autoincrement())
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int
-  rentals    Rental[]
-  createdAt  DateTime
-  totalPrice Float
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  rentals     Rental[]
+  createdAt   DateTime @default(now())
+  rentalPrice Float @default(0.00)
+  shippingFee Float @default(4.99)
+  extraFee    Float @default(0.00)
+  totalPrice  Float @default(4.99)
 }
 
 model Review {
@@ -95,15 +100,17 @@ model Rental {
   instrumentObjectId Int
   user               User             @relation(fields: [userId], references: [id])
   userId             Int
-  bookedAt           DateTime
-  rentalStart        DateTime
-  rentalEnd          DateTime
+  duration           Int
+  bookedAt           DateTime?
+  rentalStart        DateTime?
+  rentalEnd          DateTime?
   rentalStatus       RentalStatus
-  points             Int
+  points             Int?
   review             Review?
   damage             Damage?
   shoppingCart       ShoppingCart     @relation(fields: [shoppingCartId], references: [id])
   shoppingCartId     Int
+  price              Float
 }
 
 model Damage {
@@ -121,9 +128,15 @@ enum Role {
 }
 
 enum RentalStatus {
+  RESERVED
   BOOKED
   SHIPPED
   DELIVERED
   BACK
   DELAYED
+}
+
+enum UserStatus {
+  TEMP
+  ACTIVE
 }
