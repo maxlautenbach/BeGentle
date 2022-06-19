@@ -36,20 +36,21 @@ export default function Shoppingcart() {
                 <div className="px-8 py-2 bg-cl1 2xl:bg-none flex flex-col justify-end text-cl2">
                   <div className="grid grid-cols-2 place-items-end w-full pb-4">
                     <a className="pt-1 font-light text-sm">Produkte:</a>
-                    <a className='text-sm'>{data.totalPrice}€</a>
-                    <a className='font-light text-sm'>Versand:</a>
-                    <a className='text-sm'>{data.shippingFee}€</a>
+                    <a className="text-sm">{data.totalPrice}€</a>
+                    <a className="font-light text-sm">Versand:</a>
+                    <a className="text-sm">{data.shippingFee}€</a>
                     <div className="col-span-2 border-b-[1px] border-solid border-b-cl2 w-full pt-1"></div>
-                    <a className='text-sm pt-1'>Heute zu zahlen:</a>
+                    <a className="text-sm pt-1">Heute zu zahlen:</a>
                     <a className="text-cl5 text-sm">{data.totalPrice}€</a>
-                    <a className='text-sm'>Monatliche Rate:</a>
+                    <a className="text-sm">Monatliche Rate:</a>
                     <a className="text-cl5 text-sm">{data.rentalPrice}.00€</a>
-                    
                   </div>
-                  <div className='col-span-2 bg-cl2 font-gabriela w-full rounded-lg h-8'>
-                        <button className='text-black text-center w-full h-full'>Jetzt Mieten!</button>
-                    </div>
-                    <div className='pt-4'/>
+                  <div className="col-span-2 bg-cl2 font-gabriela w-full rounded-lg h-8">
+                    <button className="text-black text-center w-full h-full">
+                      Jetzt Mieten!
+                    </button>
+                  </div>
+                  <div className="pt-4" />
                 </div>
               </div>
             </div>

@@ -4,7 +4,7 @@ function Cartitem(props) {
   const rental = props.children
   const model = props.children.instrumentObject.model
   return (
-    <li className='px-4 py-4'>
+    <li className="px-4 py-4">
       <div className="flex flex-col w-[260px] h-[320px] xl:w-[295px] sm:h-[300px] bg-cl2 drop-shadow-lg rounded-xl overflow-hidden">
         <div className="h-32 w-full overflow-hidden relative">
           <Image
