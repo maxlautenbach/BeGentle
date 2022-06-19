@@ -21,17 +21,16 @@ export default function Shoppingcart() {
         )
       })
   }, [])
-  async function onClick(){
+  async function onClick() {
     const res = await fetch(
       `http://localhost:3000/api/login/checkUser/${cookies.userid}`
     )
     const data = await res.json()
-    if(data.status == "ACTIVE"){
-      Router.push("http://localhost:3000/payment/step1")
+    if (data.status == 'ACTIVE') {
+      Router.push('http://localhost:3000/payment/step1')
     } else {
-      Router.push("http://localhost:3000/login")
+      Router.push('http://localhost:3000/login')
     }
-    
   }
   return (
     <div>
@@ -60,11 +59,12 @@ export default function Shoppingcart() {
                     <a className="text-cl5 text-sm">{data.rentalPrice}.00€</a>
                   </div>
                   <div className="col-span-2 bg-cl2 font-gabriela w-full rounded-lg h-8">
-
-                      <button className="text-black text-center w-full h-full" onClick={onClick}>
-                        Jetzt Mieten!
-                      </button>
-
+                    <button
+                      className="text-black text-center w-full h-full"
+                      onClick={onClick}
+                    >
+                      Jetzt Mieten!
+                    </button>
                   </div>
                   <div className="pt-4" />
                 </div>
