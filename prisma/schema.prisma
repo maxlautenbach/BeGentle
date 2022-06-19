@@ -22,7 +22,7 @@ model User {
   lastActivity          DateTime       @default(now())
   lastname              String?
   firstname             String?
-  email                 String?         @unique
+  email                 String?        @unique
   address               Address?
   password              String?
   punkte                Int?
@@ -75,12 +75,15 @@ model InstrumentObject {
 }
 
 model ShoppingCart {
-  id         Int      @id @default(autoincrement())
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int
-  rentals    Rental[]
-  createdAt  DateTime @default(now())
-  totalPrice Float
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  rentals     Rental[]
+  createdAt   DateTime @default(now())
+  rentalPrice Float @default(0.00)
+  shippingFee Float @default(4.99)
+  extraFee    Float @default(0.00)
+  totalPrice  Float @default(4.99)
 }
 
 model Review {
@@ -98,7 +101,7 @@ model Rental {
   user               User             @relation(fields: [userId], references: [id])
   userId             Int
   duration           Int
-  bookedAt           DateTime?     
+  bookedAt           DateTime?
   rentalStart        DateTime?
   rentalEnd          DateTime?
   rentalStatus       RentalStatus
