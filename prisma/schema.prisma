@@ -17,29 +17,42 @@ model Entry {
 }
 
 model User {
-  id                    Int            @id @default(autoincrement())
+  id                    Int                 @id @default(autoincrement())
   status                UserStatus
-  lastActivity          DateTime       @default(now())
+  lastActivity          DateTime            @default(now())
   lastname              String?
   firstname             String?
-  email                 String?        @unique
+  email                 String?             @unique
   address               Address?
+  paymentInformation    PaymentInformation?
   password              String?
-  punkte                Int            @default(0)
+  punkte                Int                 @default(0)
+  phone                 String?
   zahlungsinformationen String? //tbd
-  role                  Role           @default(CUSTOMER)
+  role                  Role                @default(CUSTOMER)
   rentals               Rental[]
   shoppingCarts         ShoppingCart[]
+  orders                Order[]
 }
 
 model Address {
-  id       Int    @id @default(autoincrement())
-  street   String
-  number   Int
-  postCode Int
-  city     String
-  user     User   @relation(fields: [userId], references: [id])
-  userId   Int    @unique
+  id      Int    @id @default(autoincrement())
+  street  String
+  city    String
+  country String @default("Germany")
+  user    User   @relation(fields: [userId], references: [id])
+  userId  Int    @unique
+}
+
+model PaymentInformation {
+  id         Int     @id @default(autoincrement())
+  variant    Int
+  cardnumber String?
+  cardowner  String?
+  carddate   String?
+  ccv        String?
+  user       User    @relation(fields: [userId], references: [id])
+  userId     Int     @unique
 }
 
 model Category {
@@ -75,15 +88,29 @@ model InstrumentObject {
 }
 
 model ShoppingCart {
-  id          Int      @id @default(autoincrement())
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
-  rentals     Rental[]
-  createdAt   DateTime @default(now())
-  rentalPrice Float    @default(0.00)
-  shippingFee Float    @default(4.99)
-  extraFee    Float    @default(0.00)
-  totalPrice  Float    @default(4.99)
+  id           Int      @id @default(autoincrement())
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
+  rentals      Rental[]
+  createdAt    DateTime @default(now())
+  rentalPrice  Float    @default(0.00)
+  shippingFee  Float    @default(4.99)
+  extraFee     Float    @default(0.00)
+  totalPrice   Float    @default(4.99)
+  monthlyPrice Float    @default(0.00)
+}
+
+model Order {
+  id           Int      @id @default(autoincrement())
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
+  rentals      Rental[]
+  createdAt    DateTime @default(now())
+  rentalPrice  Float    @default(0.00)
+  shippingFee  Float    @default(4.99)
+  extraFee     Float    @default(0.00)
+  totalPrice   Float    @default(4.99)
+  monthlyPrice Float    @default(0.00)
 }
 
 model Review {
@@ -108,8 +135,10 @@ model Rental {
   points             Int?
   review             Review?
   damage             Damage?
-  shoppingCart       ShoppingCart     @relation(fields: [shoppingCartId], references: [id])
-  shoppingCartId     Int
+  shoppingCart       ShoppingCart?    @relation(fields: [shoppingCartId], references: [id])
+  shoppingCartId     Int?
+  order              Order?           @relation(fields: [orderId], references: [id])
+  orderId            Int?
   price              Float
 }
 

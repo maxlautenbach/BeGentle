@@ -3,7 +3,6 @@ import Footer from '../components/footer'
 import Cartitem from '../components/cartitem'
 import { useCookies } from 'react-cookie'
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import Router from 'next/router'
 
 export default function Shoppingcart() {

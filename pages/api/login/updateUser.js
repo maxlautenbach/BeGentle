@@ -14,20 +14,21 @@ export default async function handler(req, res) {
             id: parseInt(body.userid),
         },
         data: {
-            status: 'ACTIVE',
             lastActivity: new Date(),
             lastname: body.lastname,
             firstname: body.firstname,
-            password: body.password,
             email: body.email,
             phone: body.phone
         },
     })
-    await prisma.address.create({
+    await prisma.address.update({
+        where: {
+            userId: parseInt(body.userid)
+        },
         data: {
-            street: body.address.street,
-            city: body.address.city,
-            userId: parseInt(body.userid),
+            street: body.street,
+            city: body.city,
+            country: body.country
         },
     })
     if (user !== null) {

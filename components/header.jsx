@@ -48,6 +48,10 @@ function Header() {
             <Link href="/">Home</Link>
           </div>
           <div className="pr-8" />
+          <div className="transition ease-in-out border-b border-cl1 hover:border-cl3 hover:text-cl3">
+            <Link href="/shoppingcart">Warenkorb</Link>
+          </div>
+          <div className="pr-8" />
         </div>
         <section className="MOBILE-MENU flex justify-end items-center lg:hidden">
           <div
