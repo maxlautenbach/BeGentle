@@ -49,14 +49,14 @@ export default function Step2() {
 
   async function onClick() {
     const body = {
-        userid: cookies.userid,
-        firstname: firstname,
-        surname: surname,
-        email: email,
-        street: street,
-        city: city,
-        country: country,
-        phone: phone
+      userid: cookies.userid,
+      firstname: firstname,
+      surname: surname,
+      email: email,
+      street: street,
+      city: city,
+      country: country,
+      phone: phone,
     }
     const res = await fetch(`http://localhost:3000/api/login/updateUser`, {
       method: 'POST',
@@ -215,111 +215,113 @@ export default function Step2() {
           </text>
         </svg>
       </div>
-      <div className='flex flex-row justify-center'>
-      <div className="bg-cl4 grid grid-cols-1 lg:grid-cols-2 rounded-xl overflow-hidden w-full max-w-5xl">
-        <a className="text-3xl lg:text-2xl font-bold px-6 py-4 lg:col-span-2">
-          Kontaktdaten
-        </a>
-        <div className="px-6 pb-4 w-full">
-          <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Vorname:</div>
-          <input
-            className={inputCss}
-            defaultValue={firstname}
-            onChange={(e) => setFirstname(e.target.value)}
-          />
-          <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Name:</div>
-          <input
-            className={inputCss}
-            defaultValue={surname}
-            onChange={(e) => setSurname(e.target.value)}
-          />
-          <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
-            E-Mail Adresse:
-          </div>
-          <input
-            className={inputCss}
-            defaultValue={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
-            E-Mail Adresse bestätigen:
-          </div>
-          <input
-            className={inputCss}
-            defaultValue={confirmEmail}
-            onChange={(e) => setConfirmEmail(e.target.value)}
-          />
-        </div>
-        <div className="px-6 pb-4 w-full">
-          <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
-            Telefonnummer:
-          </div>
-          <input
-            className={inputCss}
-            defaultValue={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
-            Strasse+Hausnummer:
-          </div>
-          <input
-            className={inputCss}
-            defaultValue={street}
-            onChange={(e) => setStreet(e.target.value)}
-          />
-          <div className="pl-4 pt-4 pb-1 text-cl1 font-light">PLZ+Ort:</div>
-          <input
-            className={inputCss}
-            defaultValue={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Land:</div>
-          <input
-            className={inputCss}
-            defaultValue={country}
-            onChange={(e) => setCountry(e.target.value)}
-          />
-        </div>
-        <div
-          className="px-6 py-4 grid grid-cols-1 place-items-center lg:col-span-2 bg-cl1"
-          id="Summary"
-        >
-          <div className="w-full grid grid-cols-1 place-items-end pb-1 font-light text-cl2">
-            <div className="flex flex-row">
-              <a>Produkte:</a>
-              <a className="w-20 text-right">{rentalPrice.toFixed(2)}€</a>
+      <div className="flex flex-row justify-center">
+        <div className="bg-cl4 grid grid-cols-1 lg:grid-cols-2 rounded-xl overflow-hidden w-full max-w-5xl">
+          <a className="text-3xl lg:text-2xl font-bold px-6 py-4 lg:col-span-2">
+            Kontaktdaten
+          </a>
+          <div className="px-6 pb-4 w-full">
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Vorname:</div>
+            <input
+              className={inputCss}
+              defaultValue={firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+            />
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Name:</div>
+            <input
+              className={inputCss}
+              defaultValue={surname}
+              onChange={(e) => setSurname(e.target.value)}
+            />
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
+              E-Mail Adresse:
             </div>
-            <div className="flex flex-row">
-              <a>Zusatzprodukte:</a>
-              <a className="w-20 text-right">{extraFee.toFixed(2)}€</a>
+            <input
+              className={inputCss}
+              defaultValue={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
+              E-Mail Adresse bestätigen:
             </div>
-            <div className="flex flex-row">
-              <a>Versand:</a>
-              <a className="w-20 text-right">{shippingFee.toFixed(2)}€</a>
-            </div>
+            <input
+              className={inputCss}
+              defaultValue={confirmEmail}
+              onChange={(e) => setConfirmEmail(e.target.value)}
+            />
           </div>
-          <div className="w-full border-t-[1px] border-solid border-cl2"></div>
-          <div className="w-full grid grid-cols-1 place-items-end pb-4 font-semibold text-cl2">
-            <div className="flex flex-row">
-              <a>Heute zu zahlen:</a>
-              <a className="w-20 text-right text-cl5">
-                {totalPrice.toFixed(2)}€
-              </a>
+          <div className="px-6 pb-4 w-full">
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
+              Telefonnummer:
             </div>
-            <div className="flex flex-row">
-              <a>Monatliche Rate:</a>
-              <a className="w-20 text-right text-cl5">
-                {monthlyPrice.toFixed(2)}€
-              </a>
+            <input
+              className={inputCss}
+              defaultValue={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
+              Strasse+Hausnummer:
             </div>
+            <input
+              className={inputCss}
+              defaultValue={street}
+              onChange={(e) => setStreet(e.target.value)}
+            />
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">PLZ+Ort:</div>
+            <input
+              className={inputCss}
+              defaultValue={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Land:</div>
+            <input
+              className={inputCss}
+              defaultValue={country}
+              onChange={(e) => setCountry(e.target.value)}
+            />
           </div>
-          <button className="w-full bg-cl2 p-2 rounded-xl text-lg font-gabriela" onClick={onClick}>
-            Weiter
-          </button>
+          <div
+            className="px-6 py-4 grid grid-cols-1 place-items-center lg:col-span-2 bg-cl1"
+            id="Summary"
+          >
+            <div className="w-full grid grid-cols-1 place-items-end pb-1 font-light text-cl2">
+              <div className="flex flex-row">
+                <a>Produkte:</a>
+                <a className="w-20 text-right">{rentalPrice.toFixed(2)}€</a>
+              </div>
+              <div className="flex flex-row">
+                <a>Zusatzprodukte:</a>
+                <a className="w-20 text-right">{extraFee.toFixed(2)}€</a>
+              </div>
+              <div className="flex flex-row">
+                <a>Versand:</a>
+                <a className="w-20 text-right">{shippingFee.toFixed(2)}€</a>
+              </div>
+            </div>
+            <div className="w-full border-t-[1px] border-solid border-cl2"></div>
+            <div className="w-full grid grid-cols-1 place-items-end pb-4 font-semibold text-cl2">
+              <div className="flex flex-row">
+                <a>Heute zu zahlen:</a>
+                <a className="w-20 text-right text-cl5">
+                  {totalPrice.toFixed(2)}€
+                </a>
+              </div>
+              <div className="flex flex-row">
+                <a>Monatliche Rate:</a>
+                <a className="w-20 text-right text-cl5">
+                  {monthlyPrice.toFixed(2)}€
+                </a>
+              </div>
+            </div>
+            <button
+              className="w-full bg-cl2 p-2 rounded-xl text-lg font-gabriela"
+              onClick={onClick}
+            >
+              Weiter
+            </button>
+          </div>
         </div>
       </div>
-      </div>
-      
     </div>
   )
 }

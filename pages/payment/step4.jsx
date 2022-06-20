@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Cartitem from '../../components/cartitem'
 
-export default function Step2({id}) {
+export default function Step2({ id }) {
   function getExtra(price, rentalcount) {
     const ppi = price / rentalcount
     if (ppi == 0) {
@@ -241,7 +241,10 @@ export default function Step2({id}) {
               </a>
             </div>
           </div>
-          <button className="w-full bg-cl1 text-cl2 p-2 rounded-xl text-lg font-gabriela" onClick={() => (router.push("/"))}>
+          <button
+            className="w-full bg-cl1 text-cl2 p-2 rounded-xl text-lg font-gabriela"
+            onClick={() => router.push('/')}
+          >
             Zurück zum Shop
           </button>
         </div>
@@ -250,11 +253,11 @@ export default function Step2({id}) {
   )
 }
 
-export function getServerSideProps(context){
+export function getServerSideProps(context) {
   const id = context.query.id
-  return(
-    {props: {
-      id: id
-    }}
-  )
+  return {
+    props: {
+      id: id,
+    },
+  }
 }
