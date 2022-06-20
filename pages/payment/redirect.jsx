@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-export default function Redirect({id}) {
+export default function Redirect({ id }) {
   const router = useRouter()
   function loadingFinished() {
     router.push(`/payment/step4?id=${id}`)
@@ -39,10 +39,10 @@ export default function Redirect({id}) {
 }
 
 export function getServerSideProps(context) {
-    const id = context.query.id
-    return {
-      props: {
-        id: id,
-      },
-    }
+  const id = context.query.id
+  return {
+    props: {
+      id: id,
+    },
   }
+}
