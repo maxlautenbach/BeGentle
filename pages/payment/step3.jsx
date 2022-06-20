@@ -67,7 +67,7 @@ export default function Step2() {
       })
       const orderData = await res.json()
       if (orderData.message == 'Successful') {
-        router.push(`/payment/step4?id=${orderData.id}`)
+        router.push(`/payment/redirect?id=${orderData.id}`)
       }
     }
   }
