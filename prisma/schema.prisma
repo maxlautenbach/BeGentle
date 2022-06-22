@@ -131,7 +131,7 @@ model Rental {
   bookedAt           DateTime?
   rentalStart        DateTime?
   rentalEnd          DateTime?
-  rentalStatus       RentalStatus
+  rentalStatus       RentalStatus @default(DELIVERED)
   points             Int?
   review             Review?
   damage             Damage?
