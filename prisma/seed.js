@@ -301,6 +301,7 @@ const Address = [
 
 const User = [
   {
+    status: 'ACTIVE',
     lastname: "Koellschen",
     firstname: "Franziska",
     email: "franziska.koellschen@mail.com",
@@ -309,9 +310,10 @@ const User = [
     phone: "015732033118"
   },
   {
+    status: 'ACTIVE',
     lastname: "Lautenbach",
     firstname: "Max",
-    email: "max.lautenbach@mail.com",
+    email: "m.lautenbach@mail.com",
     password: "password",
     punkte: 1098,
     phone: "015732034975"
@@ -368,9 +370,9 @@ const Rental = [
     instrumentObjectId: 1,
     userId: 1,
     duration: 12,
-    bookedAt: '2022-03-17',
-    rentalStart: '2022-04-01',
-    rentalEnd: '2023-04-01',
+    bookedAt: '2020-12-04T00:00:00.000Z',
+    rentalStart: '2020-12-04T00:00:00.000Z',
+    rentalEnd: '2020-12-04T00:00:00.000Z',
     points: 334,
     orderId: 1,
     price: 304.99
