@@ -7,6 +7,9 @@ import ReviewSVG from '../../components/reviewSVG'
 
 export default function Home ({ instrument }) {
     const listItems = instrument.description.map( (description, index) => <li key={index}>{description}</li>)
+    function changeDuration() {
+
+    }
     return (
         <div>
           <Head>
@@ -80,8 +83,10 @@ export default function Home ({ instrument }) {
                       <p className="text-xs font-light">Monate</p>
                     </div>
                     <div className="bg-cl1 rounded-t-xl text-cl4 py-1">
-                      <p className="text-s">12+</p>
-                      <p className="text-xs font-light">Monate</p>
+                      <button onClick={changeDuration}>
+                        <p className="text-s">12+</p>
+                        <p className="text-xs font-light">Monate</p>
+                      </button>
                     </div>
                   </div>
                   <Link href={'/warenkorb'}>
@@ -131,7 +136,7 @@ export default function Home ({ instrument }) {
                 Unsere Kunden lieben dieses Instrument!
               </p>
               <div className="w-2/3 object-center">
-                <ReviewSVG />
+                <ReviewSVG review="3"/>
               </div>
               <div className="text-cl5 pt-5 pb-1">
                 <p className="text-lg font-gabriela">
