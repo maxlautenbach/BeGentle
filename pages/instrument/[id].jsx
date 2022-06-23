@@ -40,7 +40,7 @@ export default function Home ({ instrument }) {
                 className="z-1 w-full h-max bg-cl4 rounded-t-xl grid grid-cols-1  place-items-center"
                 id="Buybox"
               >
-                <div className="w-5/6 max-w-7xl font-gabriela text-2xl text-cl1 py-4">
+                <div className="w-5/6 max-w-7xl font-gabriela text-2xl text-cl1 py-4 md:text-4xl">
                   {instrument.name}
                 </div>
                 <div className="w-5/6 max-w-7xl text-sm text-cl1 py-0">
