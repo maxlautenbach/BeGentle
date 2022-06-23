@@ -31,20 +31,25 @@ export default async function handler(req, res) {
     },
   })
   if (user !== null) {
-    const tempcart = await prisma.shoppingCart.findFirst({
-      where: {
-        id: parseInt(body.tempcartid),
-      },
-      include: {
-        user: true,
-      },
-    })
+    var tempcart
+    if (body.tempcartid !== undefined) {
+      tempcart = await prisma.shoppingCart.findFirst({
+        where: {
+          id: parseInt(body.tempcartid),
+        },
+        include: {
+          user: true,
+        },
+      })
+    }
+    
     const usercart = await prisma.shoppingCart.findFirst({
       where: {
         userId: user.id,
       },
     })
-    if (tempcart.id != usercart.id) {
+
+    if (tempcart != undefined && tempcart.id != usercart.id) {
       await prisma.rental.updateMany({
         where: {
           shoppingCartId: tempcart.id,
@@ -86,9 +91,17 @@ export default async function handler(req, res) {
         lastActivity: new Date(),
       },
     })
-    res
+    if(usercart !== null){
+      res
       .status(200)
       .json({ message: 'Authenticated', userid: user.id, cartid: usercart.id })
+    }
+    else{
+      res
+      .status(200)
+      .json({ message: 'Authenticated', userid: user.id })
+    }
+    
   } else {
     res.status(404).json({ message: 'User/Password wrong' })
   }
