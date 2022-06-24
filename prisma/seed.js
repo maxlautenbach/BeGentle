@@ -292,36 +292,36 @@ const InstrumentModelData = [
 
 const Address = [
   {
-    street: "Coblitzallee",
-    city: "Mannheim",
-    country: "Deutschland",
-    userId: 1
-  }
+    street: 'Coblitzallee',
+    city: 'Mannheim',
+    country: 'Deutschland',
+    userId: 1,
+  },
 ]
 
 const User = [
   {
     status: 'ACTIVE',
-    lastname: "Koellschen",
-    firstname: "Franziska",
-    email: "franziska.koellschen@mail.com",
-    password: "password",
+    lastname: 'Koellschen',
+    firstname: 'Franziska',
+    email: 'franziska.koellschen@mail.com',
+    password: 'password',
     punkte: 1234,
-    phone: "015732033118"
+    phone: '015732033118',
   },
   {
     status: 'ACTIVE',
-    lastname: "Lautenbach",
-    firstname: "Max",
-    email: "m.lautenbach@mail.com",
-    password: "password",
+    lastname: 'Lautenbach',
+    firstname: 'Max',
+    email: 'm.lautenbach@mail.com',
+    password: 'password',
     punkte: 1098,
-    phone: "015732034975"
-  }
+    phone: '015732034975',
+  },
 ]
 
 const InstrumentObjectData = [
-  { 
+  {
     currentlyRented: true,
     modelId: 1,
   },
@@ -359,10 +359,10 @@ const InstrumentObjectData = [
 const Order = [
   {
     userId: 1,
-    rentalPrice: 300.00,
+    rentalPrice: 300.0,
     totalPrice: 304.99,
-    monthlyPrice: 25.00
-  }
+    monthlyPrice: 25.0,
+  },
 ]
 
 const Rental = [
@@ -375,8 +375,8 @@ const Rental = [
     rentalEnd: '2020-12-04T00:00:00.000Z',
     points: 334,
     orderId: 1,
-    price: 304.99
-  }
+    price: 304.99,
+  },
 ]
 
 const CategoryData = [
