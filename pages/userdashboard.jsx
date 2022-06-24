@@ -6,21 +6,15 @@ import Rental from '../components/rental'
 
 export default function Userdashboard() {
   const [cookies, setCookie] = useCookies(['cookies'])
+  const [listItems, setListItmes] = useState('')
   //const listItems = rentals.map((rental) => <Rental key={rental.id}>{rental}</Rental>)
-  async function getUserOverview() {
-    const body = {
-      userid: cookies.userid
-    }
-    const res = await fetch(`http://localhost:3000/api/userDashboard`, {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(body),
-    })
-    const data = await res.json()
-    alert(data.message)
-  }
-  let rentals = getUserOverview()
-  const listItems = rentals.map((rental) => <Rental key={rental.id}>{rental}</Rental>)
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/userDashboard?userid=${cookies.userid}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setListItmes(data.map((rental) => <Rental key={rental.id}>{rental}</Rental>))
+      })
+  }, [])
   return (
     <div>
       <div className="w-screen h-screen bg-cl4 flex flex-col">
