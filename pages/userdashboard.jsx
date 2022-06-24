@@ -1,12 +1,26 @@
 import Header from '../components/header'
 import Footer from '../components/footer'
-import Cartitem from '../components/cartitem'
 import { useCookies } from 'react-cookie'
 import { useEffect, useState } from 'react'
-import Router from 'next/router'
 import Rental from '../components/rental'
 
 export default function Userdashboard() {
+  const [cookies, setCookie] = useCookies(['cookies'])
+  //const listItems = rentals.map((rental) => <Rental key={rental.id}>{rental}</Rental>)
+  async function getUserOverview() {
+    const body = {
+      userid: cookies.userid
+    }
+    const res = await fetch(`http://localhost:3000/api/userDashboard`, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(body),
+    })
+    const data = await res.json()
+    alert(data.message)
+  }
+  let rentals = getUserOverview()
+  const listItems = rentals.map((rental) => <Rental key={rental.id}>{rental}</Rental>)
   return (
     <div>
       <div className="w-screen h-screen bg-cl4 flex flex-col">
@@ -40,7 +54,7 @@ export default function Userdashboard() {
             </div>
             <div id="MyInstruments" className='mx-7 my-5'>
                 <ul>
-                    <Rental/>
+                    {listItems}
                 </ul>
             </div>
         </div>
