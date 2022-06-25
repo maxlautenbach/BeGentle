@@ -65,9 +65,6 @@ export default function DetailPage({ instrument }) {
             <div className="w-5/6 max-w-7xl font-gabriela text-2xl text-cl1 py-4">
               {instrument.name}
             </div>
-            <div className="w-5/6 max-w-7xl text-sm text-cl1 py-0">
-              {instrument.model}
-            </div>
             <div className="w-5/6 max-w-7xl ">
               <span className="font-gabriela text-2xl text-cl5 py-1">
                 {instrument.priceInMonth},00€

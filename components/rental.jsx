@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-function Rental({ rental }) {
+function Rental(props) {
+  
   return (
+    
     <li className="text-2xl py-6 w-max h-max">
       <div className="bg-cl1 rounded-2xl relative overflow-hidden xl:w-[370px] w-[335px] drop-shadow-2xl">
         <div className="grid grid-cols-2">
@@ -23,6 +25,7 @@ function Rental({ rental }) {
               className=" bg-cl3 grid grid-cols-3 h-3/5 rounded-r-2xl rounded-bl-2xl text-center px-2 items-center"
             >
               <div className="font-gabriela text-xs text-cl1">
+              {console.log(props)}
                 Abschied schon in
               </div>
               <div className="font-gabriela text-md text-cl1 pl-3">30</div>
@@ -34,7 +37,7 @@ function Rental({ rental }) {
               id="Name"
               className="font-gabriela text-cl4 text-lg text-center"
             >
-              Hallo
+              {props.children.instrumentObject.model.name}
             </div>
           </div>
           <div className="grid grid-rows-3 gap-y-2 text-cl4 font-gabriela text-sm m-4 mt-7">
@@ -43,9 +46,9 @@ function Rental({ rental }) {
             <div>Be-Gentle-Punkte</div>
           </div>
           <div className="grid grid-rows-3 gap-y-2 text-cl4 font-gabriela text-sm m-3 mt-7">
-            <div>{rental.rentalStart}</div>
-            <div>{rental.rentalEnd}</div>
-            <div>{rental.points}</div>
+            <div>{props.children.rentalStart}</div>
+            <div>{props.children.rentalEnd}</div>
+            <div>{props.children.points}</div>
           </div>
         </div>
         <div className="m-3">
