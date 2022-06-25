@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 
-export default function Register({referer}) {
+export default function Register({ referer }) {
   const router = useRouter()
   const [cookies] = useCookies(['cookies'])
   const [firstname, setFirstname] = useState()
@@ -27,10 +27,10 @@ export default function Register({referer}) {
       address: {
         street: street,
         city: city,
-        country: country
+        country: country,
       },
       phone: phone,
-      password: password
+      password: password,
     }
     const res = await fetch(`http://localhost:3000/api/login/register`, {
       method: 'POST',
@@ -38,11 +38,11 @@ export default function Register({referer}) {
       body: JSON.stringify(body),
     })
     const data = await res.json()
-    if (data.message == 'Successful' && referer == "shoppingcart") {
+    if (data.message == 'Successful' && referer == 'shoppingcart') {
       router.push('/payment/step1')
-    } else if (data.message == 'Successful' && referer == "login") {
-        router.push('/')
-      }
+    } else if (data.message == 'Successful' && referer == 'login') {
+      router.push('/')
+    }
   }
 
   return (
@@ -51,7 +51,6 @@ export default function Register({referer}) {
         Registrierung
       </div>
       <div className="flex flex-row justify-center">
-      
         <div className="bg-cl4 grid grid-cols-1 lg:grid-cols-2 rounded-xl overflow-hidden h-max w-full max-w-5xl">
           <div className="px-6 pb-4 w-full">
             <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Vorname:</div>
@@ -82,9 +81,7 @@ export default function Register({referer}) {
               defaultValue={confirmEmail}
               onChange={(e) => setConfirmEmail(e.target.value)}
             />
-            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
-              Passwort:
-            </div>
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Passwort:</div>
             <input
               className={inputCss}
               defaultValue={password}
@@ -149,11 +146,9 @@ export default function Register({referer}) {
 }
 
 export async function getServerSideProps(context) {
-    const referer =
-      typeof context.query.referer === 'undefined'
-        ? ''
-        : context.query.referer
-    return {
-      props: { referer },
-    }
+  const referer =
+    typeof context.query.referer === 'undefined' ? '' : context.query.referer
+  return {
+    props: { referer },
   }
+}
