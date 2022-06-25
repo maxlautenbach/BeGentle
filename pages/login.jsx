@@ -3,6 +3,7 @@ import Footer from '../components/footer'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import Router from 'next/router'
+import Link from 'next/link'
 
 export default function Login({ referer }) {
   const [id, setId] = useState()
@@ -84,19 +85,25 @@ export default function Login({ referer }) {
                   </button>
                   <div className="py-2 border-b-2 border-solid border-cl2" />
                   <div className="py-2" />
-                  <button className="w-full h-12 text-cl4 bg-cl1 rounded-xl font-light text-xl">
-                    Registrieren
-                  </button>
-                  <div className="py-2" />
-                  <button
-                    className={
-                      referer.includes('shoppingcart')
-                        ? 'w-full h-12 text-cl1 border-solid border-2 border-cl1 rounded-xl font-light text-xl'
-                        : 'hidden'
-                    }
+                  <Link
+                    href={`http://localhost:3000/register?referer=${referer}`}
                   >
-                    Als Gast Bestellen
-                  </button>
+                    <button className="w-full h-12 text-cl4 bg-cl1 rounded-xl font-light text-xl">
+                      Registrieren
+                    </button>
+                  </Link>
+                  <div className="py-2" />
+                  <Link href="http://localhost:3000/payment/step1">
+                    <button
+                      className={
+                        referer.includes('shoppingcart')
+                          ? 'w-full h-12 text-cl1 border-solid border-2 border-cl1 rounded-xl font-light text-xl'
+                          : 'hidden'
+                      }
+                    >
+                      Als Gast Bestellen
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -114,11 +121,15 @@ export default function Login({ referer }) {
 }
 
 export async function getServerSideProps(context) {
-  const referer =
+  var referer =
     typeof context.req.headers.referer === 'undefined'
-      ? ''
+      ? 'login'
       : context.req.headers.referer
-  console.log(referer)
+  if (referer.includes('shoppingcart')) {
+    referer = 'shoppingcart'
+  } else {
+    referer = 'login'
+  }
   return {
     props: { referer },
   }
