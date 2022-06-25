@@ -70,7 +70,13 @@ export default function Login({ referer }) {
                     Registrieren
                   </button>
                   <div className="py-2" />
-                  <button className={referer.includes("shoppingcart") ? "w-full h-12 text-cl1 border-solid border-2 border-cl1 rounded-xl font-light text-xl" : "hidden"}>
+                  <button
+                    className={
+                      referer.includes('shoppingcart')
+                        ? 'w-full h-12 text-cl1 border-solid border-2 border-cl1 rounded-xl font-light text-xl'
+                        : 'hidden'
+                    }
+                  >
                     Als Gast Bestellen
                   </button>
                 </div>
@@ -90,7 +96,10 @@ export default function Login({ referer }) {
 }
 
 export async function getServerSideProps(context) {
-  const referer = (typeof context.req.headers.referer === 'undefined' ? "" : context.req.headers.referer)
+  const referer =
+    typeof context.req.headers.referer === 'undefined'
+      ? ''
+      : context.req.headers.referer
   console.log(referer)
   return {
     props: { referer },

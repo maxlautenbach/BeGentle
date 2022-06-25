@@ -25,16 +25,14 @@ export default function Login() {
     }
   }
 
-  let navigate = useNavigate();
+  let navigate = useNavigate()
   async function onClickLogin() {
     auth()
-    let path = 'test';
-    navigate(path);
+    let path = 'test'
+    navigate(path)
   }
 
-  async function onClickRegister() {
-    
-  }
+  async function onClickRegister() {}
 
   return (
     <div>
@@ -89,5 +87,3 @@ export default function Login() {
     </div>
   )
 }
-
-
