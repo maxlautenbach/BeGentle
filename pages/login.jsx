@@ -8,9 +8,9 @@ export default function Login({ referer }) {
   const [id, setId] = useState()
   const [password, setPassword] = useState()
   const [cookies, setCookie] = useCookies(['cookies'])
-  
+
   async function auth() {
-    if(referer.includes('shoppingcart')){
+    if (referer.includes('shoppingcart')) {
       const body = {
         id: id,
         password: password,
@@ -29,8 +29,7 @@ export default function Login({ referer }) {
         alert('Redirect')
         Router.push('http://localhost:3000/payment/step1')
       }
-    }
-    else {
+    } else {
       const body = {
         id: id,
         password: password,
