@@ -52,6 +52,10 @@ function Header() {
             <Link href="/shoppingcart">Warenkorb</Link>
           </div>
           <div className="pr-8" />
+          <div className="transition ease-in-out border-b border-cl1 hover:border-cl3 hover:text-cl3">
+            <Link href="/login">Profil</Link>
+          </div>
+          <div className="pr-8" />
         </div>
         <section className="MOBILE-MENU flex justify-end items-center lg:hidden">
           <div
@@ -83,6 +87,12 @@ function Header() {
           <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center">
             <li className="border-b border-gray-400 my-4">
               <Link href="/">Home</Link>
+            </li>
+            <li className="border-b border-gray-400 my-4">
+              <Link href="/shoppingcart">Warenkorb</Link>
+            </li>
+            <li className="border-b border-gray-400 my-4">
+              <Link href="/login">Profil</Link>
             </li>
           </ul>
         </div>
