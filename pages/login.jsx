@@ -8,25 +8,44 @@ export default function Login({ referer }) {
   const [id, setId] = useState()
   const [password, setPassword] = useState()
   const [cookies, setCookie] = useCookies(['cookies'])
+  
   async function auth() {
-    const body = {
-      id: id,
-      password: password,
-      tempcartid: cookies.cartid,
-    }
-    const res = await fetch(`http://localhost:3000/api/login/auth`, {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(body),
-    })
-    const data = await res.json()
-    alert(data.message)
-    if (res.status == 200) {
-      setCookie('userid', data.userid)
-      setCookie('cartid', data.cartid)
-      if (referer.includes('shoppingcart')) {
+    if(referer.includes('shoppingcart')){
+      const body = {
+        id: id,
+        password: password,
+        tempcartid: cookies.cartid,
+      }
+      const res = await fetch(`http://localhost:3000/api/login/auth`, {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(body),
+      })
+      const data = await res.json()
+      alert(data.message)
+      if (res.status == 200) {
+        setCookie('userid', data.userid)
+        setCookie('cartid', data.cartid)
         alert('Redirect')
         Router.push('http://localhost:3000/payment/step1')
+      }
+    }
+    else {
+      const body = {
+        id: id,
+        password: password,
+      }
+      const res = await fetch(`http://localhost:3000/api/login/auth`, {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(body),
+      })
+      const data = await res.json()
+      alert(data.message)
+      if (res.status == 200) {
+        setCookie('userid', data.userid)
+        alert('Redirect')
+        Router.push('http://localhost:3000/userdashboard')
       }
     }
   }
