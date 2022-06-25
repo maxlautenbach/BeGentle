@@ -92,13 +92,11 @@ export default async function handler(req, res) {
       },
     })
     if (usercart !== null) {
-      res
-        .status(200)
-        .json({
-          message: 'Authenticated',
-          userid: user.id,
-          cartid: usercart.id,
-        })
+      res.status(200).json({
+        message: 'Authenticated',
+        userid: user.id,
+        cartid: usercart.id,
+      })
     } else {
       res.status(200).json({ message: 'Authenticated', userid: user.id })
     }
