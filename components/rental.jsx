@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-function Rental() {
+function Rental({ rental }) {
   return (
     <li className="text-2xl py-6 w-max h-max">
       <div className="bg-cl1 rounded-2xl relative overflow-hidden xl:w-[370px] w-[335px] drop-shadow-2xl">
@@ -34,7 +34,7 @@ function Rental() {
               id="Name"
               className="font-gabriela text-cl4 text-lg text-center"
             >
-              Violini Stradivari
+              Hallo
             </div>
           </div>
           <div className="grid grid-rows-3 gap-y-2 text-cl4 font-gabriela text-sm m-4 mt-7">
@@ -43,9 +43,9 @@ function Rental() {
             <div>Be-Gentle-Punkte</div>
           </div>
           <div className="grid grid-rows-3 gap-y-2 text-cl4 font-gabriela text-sm m-3 mt-7">
-            <div>12.01.2022</div>
-            <div>31.05.2022</div>
-            <div>335</div>
+            <div>{rental.rentalStart}</div>
+            <div>{rental.rentalEnd}</div>
+            <div>{rental.points}</div>
           </div>
         </div>
         <div className="m-3">

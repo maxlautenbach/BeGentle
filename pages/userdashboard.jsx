@@ -7,7 +7,7 @@ import Rental from '../components/rental'
 export default function Userdashboard() {
   const [cookies, setCookie] = useCookies(['cookies'])
   const [listItems, setListItmes] = useState('')
-  //const listItems = rentals.map((rental) => <Rental key={rental.id}>{rental}</Rental>)
+  const [user, setUser] = useState('')
   useEffect(() => {
     fetch(`http://localhost:3000/api/userDashboard?userid=${cookies.userid}`)
       .then((res) => res.json())
@@ -17,6 +17,9 @@ export default function Userdashboard() {
         )
       })
   }, [])
+  if(listItems == undefined){
+    setListItmes("Du hast leider noch keine ausgeliehenen Instrumente. Schau dich gerne in unserem Shop um!")
+  }
   return (
     <div>
       <div className="w-screen h-screen bg-cl4 flex flex-col">
