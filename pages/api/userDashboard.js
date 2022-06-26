@@ -32,29 +32,41 @@ export default async function handler(req, res) {
   let userName = undefined
   let rentals = []
   for(let rental of data){
-    numberRentals = numberRentals + 1
+    
     sumPoints = sumPoints + parseInt(rental.points)
-    if(rental.rentalEnd > nextReturn){
-      nextReturn = rental.rentalEnd
-    }
+    
     if(userName == undefined){
       userName = user.firstname
     }
 
-    const options = {year: 'numeric', month: 'long', day: 'numeric' };
-    const dateStart = new Date(rental.rentalStart).toLocaleDateString('de-DE', options)
-    const dateEnd = new Date(rental.rentalEnd).toLocaleDateString('de-DE', options)
-    const returnIn = (rental.rentalStart.getTime()-rental.rentalEnd.getTime()) / (1000*3600*24)
-    dateNextReturn = new Date(nextReturn).toLocaleDateString('de-DE', options)
+    if(new Date(rental.rentalEnd) >= new Date()){
+      if(rental.rentalEnd > nextReturn){
+        nextReturn = rental.rentalEnd
+      }
+      numberRentals = numberRentals + 1
+      let dateStart
+      let dateEnd
+      let returnIn
+      if(rental.rentalStart !== undefined && rental.rentalEnd !== undefined){
+        const options = {year: 'numeric', month: 'long', day: 'numeric' };
+        dateStart = new Date(rental.rentalStart).toLocaleDateString('de-DE', options)
+        dateEnd = new Date(rental.rentalEnd).toLocaleDateString('de-DE', options)
+        returnIn = (rental.rentalStart.getTime()-rental.rentalEnd.getTime()) / (1000*3600*24)
+        dateNextReturn = new Date(nextReturn).toLocaleDateString('de-DE', options)
 
-    let newRental = {
-      instrumentObject: rental.instrumentObject,
-      points: rental.points,
-      rentalStart: dateStart,
-      rentalEnd: dateEnd,
-      returnInDays: returnIn,
+      }
+
+      let newRental = {
+        id: rental.id,
+        instrumentObject: rental.instrumentObject,
+        points: rental.points,
+        rentalStart: dateStart,
+        rentalEnd: dateEnd,
+        returnInDays: returnIn,
+      }
+      rentals.push(newRental)
     }
-    rentals.push(newRental)
+    
   }
   
   const dashboard = {

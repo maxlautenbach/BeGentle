@@ -22,9 +22,7 @@ export default function Userdashboard() {
       
   }, [])
   
-  const ratingChanged = (newRating) => {
-    console.log(newRating)
-  }
+  
 
   return (
     <div>
@@ -67,7 +65,6 @@ export default function Userdashboard() {
             <div id="MyInstruments" className={'mx-7 my-5'}>
               <ul>{listItems}</ul>
             </div>
-            <ReactStars count={5} size={24} color2={'#ffd700'} onChange={ratingChanged}/>
           </div>
           <div className="hidden sm:flex">
             <Footer />

@@ -1,7 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import {useCookies} from 'react-cookie'
 
 function Rental(props) {
+  const [cookies, setCookie] = useCookies(['cookies'])
+
+  function onClickReturn() {
+    setCookie('rentalid', props.children.id)
+  }
   
   return (
     
@@ -28,7 +34,7 @@ function Rental(props) {
               {console.log(props)}
                 Abschied schon in
               </div>
-              <div className="font-gabriela text-md text-cl1 pl-3">30</div>
+              <div className="font-gabriela text-md text-cl1 pl-3">{props.children.returnInDays}</div>
               <div className="font-gabriela text-xs text-cl1">
                 <span className="align-middle">Tagen</span>
               </div>
@@ -52,8 +58,8 @@ function Rental(props) {
           </div>
         </div>
         <div className="m-3">
-          <Link href="google.com">
-            <button className=" text-base font-bold w-full text-cl1 bg-cl2 py-1 rounded-3xl">
+          <Link href="/return">
+            <button onClick={onClickReturn} className=" text-base font-bold w-full text-cl1 bg-cl2 py-1 rounded-3xl">
               Instrument zurückgeben
             </button>
           </Link>

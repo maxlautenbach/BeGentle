@@ -116,7 +116,7 @@ model Order {
 model Review {
   id          Int    @id @default(autoincrement())
   stars       Float
-  description String
+  description String?
   rental      Rental @relation(fields: [rentalId], references: [id])
   rentalId    Int    @unique
 }
