@@ -6,20 +6,24 @@ import Link from 'next/link'
 import ReviewSVG from '../../components/reviewSVG'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
+import { useState } from 'react'
 
-export default function DetailPage({ instrument }) {
+export default function DetailPage({instrument}) {
+  console.log(instrument.review)
   const router = useRouter()
   const listItems = instrument.description.map((description, index) => (
     <li key={index}>{description}</li>
   ))
   const [cookies] = useCookies(['cookies'])
+  const [duration, setDuration] = useState(12)
+  const [price, setPrice] = useState(instrument.priceInMonth*duration)
   async function onClick() {
     const body = {
       userid: cookies.userid,
       cartid: cookies.cartid,
       instrumentId: instrument.id,
-      price: instrument.priceInMonth,
-      duration: 1,
+      price: price,
+      duration: duration,
     }
     const res = await fetch(`http://localhost:3000/api/rental/addToCart`, {
       method: 'POST',
@@ -30,6 +34,23 @@ export default function DetailPage({ instrument }) {
     if (data.message == 'Successful') {
       router.push('/shoppingcart')
     }
+  }
+
+  function onClickDuration1(){
+    setDuration(1),
+    setPrice(1*instrument.priceInMonth)
+  }
+  function onClickDuration3(){
+    setDuration(3),
+    setPrice(3*instrument.priceInMonth)
+  }
+  function onClickDuration6(){
+    setDuration(6),
+    setPrice(6*instrument.priceInMonth)
+  }
+  function onClickDuration12(){
+    setDuration(12),
+    setPrice(12*instrument.priceInMonth)
   }
 
   return (
@@ -67,9 +88,8 @@ export default function DetailPage({ instrument }) {
             </div>
             <div className="w-5/6 max-w-7xl ">
               <span className="font-gabriela text-2xl text-cl5 py-1">
-                {instrument.priceInMonth},00€
+                {price},00€
               </span>
-              <span className="text-xs text-cl1"> im Monat</span>
             </div>
             <div className="w-5/6 max-w-7xl text-xs text-cl1 py-1">
               <p>
@@ -89,22 +109,22 @@ export default function DetailPage({ instrument }) {
             </div>
             <div className="z-1 w-5/6 max-w-7xl bg-cl1 rounded-xl place-items-center border-cl1 border-2 mb-3 mt-1">
               <div className="grid grid-cols-4 text-center bg-cl4 text-cl1 rounded-t-xl">
-                <div className="rounded-t-xl py-1">
-                  <p className="text-s">1+</p>
+                <button onClick={onClickDuration1} className={duration==1 ? 'rounded-t-xl py-1 bg-cl1 text-cl4' : 'rounded-t-xl py-1 bg-cl4'}>
+                  <p className="text-s">1</p>
                   <p className="text-xs font-light">Monate</p>
-                </div>
-                <div className="rounded-t-xl py-1">
-                  <p className="text-s">3+</p>
+                </button>
+                <button onClick={onClickDuration3} className={duration==3 ? 'rounded-t-xl py-1 bg-cl1 text-cl4' : 'rounded-t-xl py-1 bg-cl4'}>
+                  <p className="text-s">3</p>
                   <p className="text-xs font-light">Monate</p>
-                </div>
-                <div className="rounded-t-xl py-1">
-                  <p className="text-s">6+</p>
+                </button>
+                <button onClick={onClickDuration6} className={duration==6 ? 'rounded-t-xl py-1 bg-cl1 text-cl4' : 'rounded-t-xl py-1 bg-cl4'}>
+                  <p className="text-s">6</p>
                   <p className="text-xs font-light">Monate</p>
-                </div>
-                <div className="bg-cl1 rounded-t-xl text-cl4 py-1">
-                  <p className="text-s">12+</p>
+                </button>
+                <button onClick={onClickDuration12} className={duration==12 ? 'rounded-t-xl py-1 bg-cl1 text-cl4' : 'rounded-t-xl py-1 bg-cl4'}>
+                  <p className="text-s">12</p>
                   <p className="text-xs font-light">Monate</p>
-                </div>
+                </button>
               </div>
               <button className="w-full" onClick={onClick}>
                 <p className="text-cl4 text-center p-3 hover:bg-cl6 hover:text-cl1 rounded-b-xl transition ease-in-out">
