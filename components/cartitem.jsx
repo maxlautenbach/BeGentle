@@ -19,14 +19,13 @@ function Cartitem(props) {
             <div>{model.name}</div>
           </div>
           <div className="w-full border-t-[1px] border-solid border-t-black">
-            <a className="text-sm font-light w-full">
+            <div className="text-sm font-light w-full">
               Mindestmietdauer:{' '}
               <a className="text-cl5">{rental.duration} Monat</a>
-            </a>
-            <br />
-            <a className="text-sm font-light w-full">
+            </div>
+            <div className="text-sm font-light w-full">
               Lieferzeit: max. <a className="text-cl5">2 Werktage</a>
-            </a>
+            </div>
           </div>
         </div>
         <div className="bg-cl3 grid grid-cols-1 place-items-center py-2">

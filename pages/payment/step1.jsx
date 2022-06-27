@@ -1,31 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 
-export default function Step1() {
+export default function Step1({ res_data, rentalCount, rentalPrice }) {
   const router = useRouter()
   const [cookies] = useCookies(['cookies'])
-  const cartid = cookies.cartid
   const [shipping, setShipping] = useState(1)
   const [shippingFee, setShippingFee] = useState('4.99')
   const [extra, setExtra] = useState(1)
   const [extraFee, setExtraFee] = useState('0.00')
-  const [data, setData] = useState({ id: 1 })
-  const [rentalCount, setRentalCount] = useState(1)
-  const [rentalPrice, setRentalPrice] = useState(0)
+  const data = JSON.parse(res_data)
+
   function round(x, digit) {
     const multiplier = Math.pow(10, digit)
     return Math.round(parseFloat(x) * multiplier) / multiplier
   }
-  useEffect(() => {
-    fetch('/api/rental/getCart?cartid=' + cartid)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setRentalCount(data.rentalCount)
-        setRentalPrice(data.rentalPrice)
-      })
-  }, [])
   function onClickV1() {
     setShipping(1)
     setShippingFee('4.99')
@@ -489,4 +478,29 @@ export default function Step1() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const cookies = context.req.cookies
+  var res_data = ''
+  var rentalCount = ''
+  var rentalPrice = ''
+
+  await fetch(
+    'http://localhost:3000/api/rental/getCart?cartid=' + cookies.cartid
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      res_data = data
+      rentalCount = data.rentalCount
+      rentalPrice = data.rentalPrice
+    })
+
+  return {
+    props: {
+      res_data: JSON.stringify(res_data),
+      rentalCount: rentalCount,
+      rentalPrice: rentalPrice,
+    },
+  }
 }

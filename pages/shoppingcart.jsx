@@ -2,24 +2,13 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import Cartitem from '../components/cartitem'
 import { useCookies } from 'react-cookie'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Router from 'next/router'
 
-export default function Shoppingcart() {
+export default function Shoppingcart({ data, res_rentals }) {
+  data = JSON.parse(data)
+  const [rentals] = useState(res_rentals.map((item) => <Cartitem key={item.id}>{item}</Cartitem>))
   const [cookies] = useCookies(['cookies'])
-  const cartid = cookies.cartid
-  const [data, setData] = useState({ id: 1 })
-  const [rentals, setRentals] = useState(<li></li>)
-  useEffect(() => {
-    fetch('/api/rental/getCart?cartid=' + cartid)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setRentals(
-          data.rentals.map((item) => <Cartitem key={item.id}>{item}</Cartitem>)
-        )
-      })
-  }, [])
   async function onClick() {
     const res = await fetch(
       `http://localhost:3000/api/login/checkUser/${cookies.userid}`
@@ -80,4 +69,22 @@ export default function Shoppingcart() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context){
+  const cookies = context.req.cookies;
+  var res_data = ""
+  var rentals = ""
+  await fetch(`http://localhost:3000/api/rental/getCart?cartid=${parseInt(cookies.cartid)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        res_data = data
+        rentals = data.rentals
+      })
+  return {
+    props: {
+      data: JSON.stringify(res_data),
+      res_rentals: rentals
+    },
+  };
 }
