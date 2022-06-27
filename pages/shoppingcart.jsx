@@ -7,7 +7,9 @@ import Router from 'next/router'
 
 export default function Shoppingcart({ data, res_rentals }) {
   data = JSON.parse(data)
-  const [rentals] = useState(res_rentals.map((item) => <Cartitem key={item.id}>{item}</Cartitem>))
+  const [rentals] = useState(
+    res_rentals.map((item) => <Cartitem key={item.id}>{item}</Cartitem>)
+  )
   const [cookies] = useCookies(['cookies'])
   async function onClick() {
     const res = await fetch(
@@ -71,20 +73,24 @@ export default function Shoppingcart({ data, res_rentals }) {
   )
 }
 
-export async function getServerSideProps(context){
-  const cookies = context.req.cookies;
-  var res_data = ""
-  var rentals = ""
-  await fetch(`http://localhost:3000/api/rental/getCart?cartid=${parseInt(cookies.cartid)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        res_data = data
-        rentals = data.rentals
-      })
+export async function getServerSideProps(context) {
+  const cookies = context.req.cookies
+  var res_data = ''
+  var rentals = ''
+  await fetch(
+    `http://localhost:3000/api/rental/getCart?cartid=${parseInt(
+      cookies.cartid
+    )}`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      res_data = data
+      rentals = data.rentals
+    })
   return {
     props: {
       data: JSON.stringify(res_data),
-      res_rentals: rentals
+      res_rentals: rentals,
     },
-  };
+  }
 }

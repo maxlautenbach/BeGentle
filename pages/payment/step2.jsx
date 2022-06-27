@@ -17,10 +17,18 @@ export default function Step2({ res_data, user_data }) {
   const [email, setEmail] = useState(userdata.data.email)
   const [confirmEmail, setConfirmEmail] = useState(userdata.data.email)
   const [phone, setPhone] = useState(userdata.data.phone)
-  const [street, setStreet] = useState(userdata.data.address == null ? '' : userdata.data.address.street)
-  const [city, setCity] = useState(userdata.data.address == null ? '' : userdata.data.address.city)
-  const [country, setCountry] = useState(userdata.data.address == null ? 'Deutschland' : userdata.data.address.country)
-  
+  const [street, setStreet] = useState(
+    userdata.data.address == null ? '' : userdata.data.address.street
+  )
+  const [city, setCity] = useState(
+    userdata.data.address == null ? '' : userdata.data.address.city
+  )
+  const [country, setCountry] = useState(
+    userdata.data.address == null
+      ? 'Deutschland'
+      : userdata.data.address.country
+  )
+
   const inputCss =
     'w-full h-12 rounded-xl bg-cl4 drop-shadow-xl text-black text-xl focus:bg-cl2 transition ease-in-out outline-none px-4 py-4'
 
