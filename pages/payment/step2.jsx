@@ -1,51 +1,36 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 
-export default function Step2() {
+export default function Step2({ res_data, user_data }) {
   const router = useRouter()
+  const data = JSON.parse(res_data)
+  const userdata = JSON.parse(user_data)
   const [cookies] = useCookies(['cookies'])
-  const cartid = cookies.cartid
-  const [shippingFee, setShippingFee] = useState(0)
-  const [extraFee, setExtraFee] = useState(0)
-  const [rentalPrice, setRentalPrice] = useState(0)
-  const [monthlyPrice, setMonthlyPrice] = useState(0)
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [firstname, setFirstname] = useState()
-  const [surname, setSurname] = useState()
-  const [email, setEmail] = useState()
-  const [confirmEmail, setConfirmEmail] = useState()
-  const [phone, setPhone] = useState()
-  const [street, setStreet] = useState()
-  const [city, setCity] = useState()
-  const [country, setCountry] = useState('Deutschland')
+  const [shippingFee] = useState(data.shippingFee)
+  const [extraFee] = useState(data.extraFee)
+  const [rentalPrice] = useState(data.rentalPrice)
+  const [monthlyPrice] = useState(data.monthlyPrice)
+  const [totalPrice] = useState(data.totalPrice)
+  const [firstname, setFirstname] = useState(userdata.data.firstname)
+  const [surname, setSurname] = useState(userdata.data.surname)
+  const [email, setEmail] = useState(userdata.data.email)
+  const [confirmEmail, setConfirmEmail] = useState(userdata.data.email)
+  const [phone, setPhone] = useState(userdata.data.phone)
+  const [street, setStreet] = useState(
+    userdata.data.address == null ? '' : userdata.data.address.street
+  )
+  const [city, setCity] = useState(
+    userdata.data.address == null ? '' : userdata.data.address.city
+  )
+  const [country, setCountry] = useState(
+    userdata.data.address == null
+      ? 'Deutschland'
+      : userdata.data.address.country
+  )
+
   const inputCss =
     'w-full h-12 rounded-xl bg-cl4 drop-shadow-xl text-black text-xl focus:bg-cl2 transition ease-in-out outline-none px-4 py-4'
-  useEffect(() => {
-    fetch('/api/rental/getCart?cartid=' + cartid)
-      .then((res) => res.json())
-      .then((data) => {
-        setRentalPrice(data.rentalPrice)
-        setExtraFee(data.extraFee)
-        setShippingFee(data.shippingFee)
-        setMonthlyPrice(data.monthlyPrice)
-        setTotalPrice(data.totalPrice)
-      })
-  }, [])
-  useEffect(() => {
-    fetch(`/api/login/checkUser/${cookies.userid}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setFirstname(data.data.firstname)
-        setSurname(data.data.lastname)
-        setEmail(data.data.email)
-        setConfirmEmail(data.data.email)
-        setStreet(`${data.data.address.street}`)
-        setCity(`${data.data.address.city}`)
-        setCountry(data.data.address.country)
-        setPhone(data.data.phone)
-      })
-  })
 
   async function onClick() {
     const body = {
@@ -324,4 +309,28 @@ export default function Step2() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const cookies = context.req.cookies
+  var res_data = ''
+  var user_data = ''
+  await fetch(
+    'http://localhost:3000/api/rental/getCart?cartid=' + cookies.cartid
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      res_data = data
+    })
+  await fetch(`http://localhost:3000/api/login/checkUser/${cookies.userid}`)
+    .then((res) => res.json())
+    .then((data) => {
+      user_data = data
+    })
+  return {
+    props: {
+      res_data: JSON.stringify(res_data),
+      user_data: JSON.stringify(user_data),
+    },
+  }
 }

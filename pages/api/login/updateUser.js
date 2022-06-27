@@ -21,16 +21,27 @@ export default async function handler(req, res) {
       phone: body.phone,
     },
   })
-  await prisma.address.update({
-    where: {
-      userId: parseInt(body.userid),
-    },
-    data: {
-      street: body.street,
-      city: body.city,
-      country: body.country,
-    },
-  })
+  try {
+    await prisma.address.update({
+      where: {
+        userId: parseInt(body.userid),
+      },
+      data: {
+        street: body.street,
+        city: body.city,
+        country: body.country,
+      },
+    })
+  } catch (error) {
+    await prisma.address.create({
+      data: {
+        userId: parseInt(body.userid),
+        street: body.street,
+        city: body.city,
+        country: body.country,
+      },
+    })
+  }
   if (user !== null) {
     res.status(200).json({ message: 'Successful' })
   } else {

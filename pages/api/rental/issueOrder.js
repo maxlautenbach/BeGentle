@@ -29,7 +29,6 @@ export default async function handler(req, res) {
     },
   })
   for (const el of data.rentals) {
-    console.log(el)
     const duration = el.duration
     const rentalStart = new Date()
     const date = new Date(rentalStart)
