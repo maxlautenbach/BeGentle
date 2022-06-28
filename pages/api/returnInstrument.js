@@ -21,6 +21,12 @@ export default async function handler(req, res) {
           },
     })
 
+    const model = await prisma.rental.findFirst({
+      where: {
+        id: parseInt(rental.instrumentObject.modelId)
+      }
+    })
+
     await prisma.rental.update({
       where: {
         id: parseInt(body.rentalid),
@@ -40,7 +46,7 @@ export default async function handler(req, res) {
     await prisma.review.create({
         data: {
           stars: parseInt(body.rating),
-          rentalId: rental.id,
+          instrumentModelId: model.id,
         },
       })
   } catch (error) {

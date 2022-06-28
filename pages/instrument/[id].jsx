@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie'
 import { useState } from 'react'
 
 export default function DetailPage({instrument}) {
-  console.log(instrument.review)
+  console.log(instrument.stars)
   const router = useRouter()
   const listItems = instrument.description.map((description, index) => (
     <li key={index}>{description}</li>
@@ -178,7 +178,7 @@ export default function DetailPage({instrument}) {
             Unsere Kunden lieben dieses Instrument!
           </p>
           <div className="w-2/3 object-center">
-            <ReviewSVG />
+            <ReviewSVG>{instrument.stars}</ReviewSVG>
           </div>
           <div className="text-cl5 pt-5 pb-1">
             <p className="text-lg font-gabriela">

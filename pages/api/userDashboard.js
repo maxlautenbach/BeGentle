@@ -51,7 +51,7 @@ export default async function handler(req, res) {
         const options = {year: 'numeric', month: 'long', day: 'numeric' };
         dateStart = new Date(rental.rentalStart).toLocaleDateString('de-DE', options)
         dateEnd = new Date(rental.rentalEnd).toLocaleDateString('de-DE', options)
-        returnIn = (rental.rentalStart.getTime()-rental.rentalEnd.getTime()) / (1000*3600*24)
+        returnIn = (rental.rentalEnd.getTime() - rental.rentalStart.getTime()) / (1000*3600*24)
         dateNextReturn = new Date(nextReturn).toLocaleDateString('de-DE', options)
 
       }

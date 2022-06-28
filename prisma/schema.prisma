@@ -77,6 +77,7 @@ model InstrumentModel {
   instrumentTypId   Int
   isRecommended     Boolean            @default(false)
   isAvailable       Boolean            @default(true)
+  review            Review[]
 }
 
 model InstrumentObject {
@@ -114,11 +115,11 @@ model Order {
 }
 
 model Review {
-  id          Int    @id @default(autoincrement())
-  stars       Float
-  description String?
-  rental      Rental @relation(fields: [rentalId], references: [id])
-  rentalId    Int    @unique
+  id                    Int    @id @default(autoincrement())
+  stars                 Float
+  description           String?
+  instrumentModel       InstrumentModel? @relation(fields: [instrumentModelId], references: [id])
+  instrumentModelId     Int?    @unique
 }
 
 model Rental {
@@ -133,7 +134,6 @@ model Rental {
   rentalEnd          DateTime?
   rentalStatus       RentalStatus @default(DELIVERED)
   points             Int?
-  review             Review?
   damage             Damage?
   shoppingCart       ShoppingCart?    @relation(fields: [shoppingCartId], references: [id])
   shoppingCartId     Int?

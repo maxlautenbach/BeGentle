@@ -372,7 +372,7 @@ const Rental = [
     duration: 12,
     bookedAt: '2020-12-04T00:00:00.000Z',
     rentalStart: '2020-12-04T00:00:00.000Z',
-    rentalEnd: '2020-12-04T00:00:00.000Z',
+    rentalEnd: '2022-12-04T00:00:00.000Z',
     points: 334,
     orderId: 1,
     price: 304.99,

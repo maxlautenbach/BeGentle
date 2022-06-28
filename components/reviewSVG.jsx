@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-function SvgComponent({ review }) {
-  const stars = parseInt(review);
+function SvgComponent(props) {
+  const stars = props.children
   var star1 = "#c8b7b7";
   var star2 = "#c8b7b7";
   var star3 = "#c8b7b7";
