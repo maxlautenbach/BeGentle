@@ -35,7 +35,9 @@ export default function Userdashboard() {
               <p className="text-sm font-light">
                 Hier findest du alles über deine ausgeliehenen Schätze!
               </p>
-              <div className="gap-4 grid grid-cols-3 overflow-scroll w-max my-5 drop-shadow-md">
+              <div className="w-max flex flex-row my-5 drop-shadow-md overflow-x-scroll">
+
+              
                 <div className="bg-cl2 rounded-2xl w-36 h-28 p-2">
                   <p className="text-xs font-semibold">Deine Instrumente</p>
                   <div className="grid grid-cols-1 h-4/5 content-center">
