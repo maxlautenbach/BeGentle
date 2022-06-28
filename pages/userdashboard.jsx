@@ -3,7 +3,6 @@ import Footer from '../components/footer'
 import { useCookies } from 'react-cookie'
 import { useEffect, useState } from 'react'
 import Rental from '../components/rental'
-import ReactStars from 'react-stars'
 
 export default function Userdashboard() {
   const [cookies, setCookie] = useCookies(['cookies'])
@@ -35,10 +34,10 @@ export default function Userdashboard() {
               <p className="text-sm font-light">
                 Hier findest du alles über deine ausgeliehenen Schätze!
               </p>
-              <div className="w-max flex flex-row my-5 drop-shadow-md overflow-x-scroll">
+              <div className="w-full flex flex-row my-5 drop-shadow-md overflow-auto">
 
               
-                <div className="bg-cl2 rounded-2xl w-36 h-28 p-2">
+                <div className="bg-cl2 rounded-2xl min-w-[180px] h-28 p-2 mr-5">
                   <p className="text-xs font-semibold">Deine Instrumente</p>
                   <div className="grid grid-cols-1 h-4/5 content-center">
                     <span className="align-middle font-gabriela text-4xl text-center text-cl1">
@@ -46,7 +45,7 @@ export default function Userdashboard() {
                     </span>
                   </div>
                 </div>
-                <div className="bg-cl2 rounded-2xl w-36 h-28 p-2">
+                <div className="bg-cl2 rounded-2xl min-w-[180px] h-28 p-2 mr-5">
                   <p className="text-xs font-semibold">Be-Gentle-Punkte</p>
                   <div className="grid grid-cols-1 h-4/5 content-center">
                     <span className="align-middle font-gabriela text-4xl text-center text-cl1">
@@ -54,7 +53,7 @@ export default function Userdashboard() {
                     </span>
                   </div>
                 </div>
-                <div className="bg-cl2 rounded-2xl w-36 h-28 p-2">
+                <div className="bg-cl2 rounded-2xl min-w-[180px] h-28 p-2">
                   <p className="text-xs font-semibold">Nächster Abschied</p>
                   <div className="grid grid-cols-1 h-4/5 content-center">
                     <p className="font-gabriela text-lg text-center text-cl1">
