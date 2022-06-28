@@ -16,7 +16,7 @@ export default function DetailPage({instrument}) {
   ))
   const [cookies] = useCookies(['cookies'])
   const [duration, setDuration] = useState(12)
-  const [price, setPrice] = useState(instrument.priceInMonth*duration)
+  const [price, setPrice] = useState(instrument.priceInMonth)
   async function onClick() {
     const body = {
       userid: cookies.userid,
@@ -38,19 +38,19 @@ export default function DetailPage({instrument}) {
 
   function onClickDuration1(){
     setDuration(1),
-    setPrice(1*instrument.priceInMonth)
+    setPrice(parseInt(2*instrument.priceInMonth))
   }
   function onClickDuration3(){
     setDuration(3),
-    setPrice(3*instrument.priceInMonth)
+    setPrice(parseInt(1.75*instrument.priceInMonth))
   }
   function onClickDuration6(){
     setDuration(6),
-    setPrice(6*instrument.priceInMonth)
+    setPrice(parseInt(1.4*instrument.priceInMonth))
   }
   function onClickDuration12(){
     setDuration(12),
-    setPrice(12*instrument.priceInMonth)
+    setPrice(parseInt(instrument.priceInMonth))
   }
 
   return (
@@ -89,6 +89,9 @@ export default function DetailPage({instrument}) {
             <div className="w-5/6 max-w-7xl ">
               <span className="font-gabriela text-2xl text-cl5 py-1">
                 {price},00€
+              </span>
+              <span className='text-md text-cl1 p-2'>
+                im Monat
               </span>
             </div>
             <div className="w-5/6 max-w-7xl text-xs text-cl1 py-1">
