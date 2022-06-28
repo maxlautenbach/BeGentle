@@ -330,7 +330,7 @@ export default function Step1({ res_data, rentalCount, rentalPrice }) {
               </div>
               <div className="grid grid-cols-1 place-items-center h-full flex-grow">
                 <div className="grid grid-cols-1 place-items-start w-full h-max">
-                  <a className="font-bold text-xl lg:text-2xl">Care</a>
+                  <a className="font-bold text-xl lg:text-2xl">Basic</a>
                   <a className="lg:text-base text-sm text-left sm:hidden">
                     Diebstahl-versicherung
                   </a>
@@ -366,7 +366,7 @@ export default function Step1({ res_data, rentalCount, rentalPrice }) {
               </div>
               <div className="grid grid-cols-1 place-items-center h-full flex-grow">
                 <div className="grid grid-cols-1 place-items-start w-full h-max">
-                  <a className="font-bold text-xl lg:text-2xl">Care+</a>
+                  <a className="font-bold text-xl lg:text-2xl">Care</a>
                   <a className="lg:text-base text-xs text-left">
                     Alle Dienste von Care und
                   </a>
@@ -402,7 +402,9 @@ export default function Step1({ res_data, rentalCount, rentalPrice }) {
               </div>
               <div className="grid grid-cols-1 place-items-center h-full flex-grow">
                 <div className="grid grid-cols-1 place-items-start w-full h-max">
-                  <a className="font-bold text-xl lg:text-2xl">Care Ultimate</a>
+                  <a className="font-bold text-xl sm:text-xl lg:text-2xl">
+                    Care+
+                  </a>
                   <a className="lg:text-base text-xs text-left">
                     Alle Dienste von Care+{' '}
                   </a>

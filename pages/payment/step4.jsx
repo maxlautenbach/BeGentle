@@ -7,11 +7,11 @@ export default function Step4({ id, res_data }) {
   function getExtra(price, rentalcount) {
     const ppi = price / rentalcount
     if (ppi == 0) {
-      return 'Care'
+      return 'Basic'
     } else if (ppi == 4.99) {
-      return 'Care+'
+      return 'Care'
     } else if (ppi == 12.99) {
-      return 'Care Ultimate'
+      return 'Care+'
     }
   }
   function getShipping(price) {
