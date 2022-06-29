@@ -48,12 +48,12 @@ export default function Return() {
     <div className=' bg-cl4 h-max w-screen'>
         <Header/>
         <div className="flex-grow grid grid-cols-1 place-items-center">
-            <div className="w-screen sm:w-11/12 lg:w-5/6 max-w-7xl h-screen sm:h-5/6 sm:rounded-xl overflow-hidden">
+            <div className="w-screen sm:w-11/12 lg:w-5/6 max-w-7xl h-full sm:rounded-xl">
                 <div id="overview" className="ml-7 my-5 mr-3">
                     <p className=' font-gabriela text-cl1 text-2xl md:text-4xl'>Wir hoffen du hattest eine musikalische Erfahrung!</p>
                     <span className='md:text-xl md:pt-5'>Schade, dass dich dein Instrument nun verlassen muss!</span>
                     <div className="flex flex-row justify-center mt-5">
-                        <div className="grid grid-cols-1  rounded-xl overflow-hidden w-full">
+                        <div className="grid grid-cols-1  rounded-xl h-min w-full">
                             <div className="px-1 py-4 w-full">
                                 <a className="text-3xl md:text-4xl font-bold">Versand</a>
                                 <div className="py-4" />
@@ -124,7 +124,7 @@ export default function Return() {
                                 </div>
                                 
                                 <button
-                                    className="w-full bg-cl1 text-cl4 p-2 mb-4 mt-6 rounded-xl text-lg font-gabriela"
+                                    className="z-10 w-full bg-cl1 text-cl4 p-2 mb-4 mt-6 rounded-xl text-lg font-gabriela"
                                     onClick={returnInstrument}
                                     >
                                     Jetzt verbindlich zurückgeben

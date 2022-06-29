@@ -11,7 +11,7 @@ export default function Userdashboard({ data, rentals }) {
       <div className="w-screen h-screen bg-cl4 flex flex-col">
         <Header />
         <div className="flex-grow grid grid-cols-1 place-items-center">
-          <div className="w-screen sm:w-11/12 lg:w-5/6 max-w-7xl h-full sm:h-5/6 sm:rounded-xl overflow-hidden">
+          <div className="w-screen sm:w-11/12 lg:w-5/6 max-w-7xl h-full sm:rounded-xl ">
             <div id="overview" className="ml-7 my-5 mr-3">
               <p className="font-gabriela text-cl1 text-xl md:text-3xl md:mb-2">Hallo {data.userName}!</p>
               <p className="text-sm font-light md:text-xl">
@@ -46,7 +46,7 @@ export default function Userdashboard({ data, rentals }) {
                 </div>
               </div>
             </div>
-            <div id="MyInstruments" className={'mx-7 my-5 '}>
+            <div id="MyInstruments" className={'mx-7 my-5 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 place-items-center'}>
               <ul>{rental}</ul>
             </div>
           </div>

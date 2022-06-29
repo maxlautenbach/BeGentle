@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { useSSE } from 'use-sse'
+import { useRouter } from 'next/router'
 
 async function createTempUser() {
   const res = await fetch(`http://localhost:3000/api/login/createUser`, {
@@ -14,11 +16,13 @@ async function createTempUser() {
   return data
 }
 
-async function checkUserID(cookies, setCookie) {
+async function checkUserID(cookies) {
+  var userid = ''
+  var cartid = ''
   if (typeof cookies.userid == 'undefined') {
     const userdata = await createTempUser()
-    setCookie('userid', userdata.userid)
-    setCookie('cartid', userdata.cartid)
+    userid = userdata.userid
+    cartid = userdata.cartid
   } else {
     const res = await fetch(
       `http://localhost:3000/api/login/checkUser/${cookies.userid}`
@@ -27,16 +31,43 @@ async function checkUserID(cookies, setCookie) {
 
     if (data.message != 'Successful') {
       const userdata = await createTempUser()
-      setCookie('userid', userdata.userid)
-      setCookie('cartid', userdata.cartid)
+      userid = userdata.userid
+      cartid = userdata.cartid
+    } else {
+      userid = data.data.id
+      cartid = data.data.shoppingCarts[0].id
     }
+  }
+  return {
+    userid: userid,
+    cartid: cartid,
   }
 }
 
 function Header() {
+  const Router = useRouter()
   const [isNavOpen, setIsNavOpen] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie] = useCookies(['cookies'])
-  checkUserID(cookies, setCookie)
+  useSSE(() => {
+    return checkUserID(cookies).then((res) => {
+      setCookie('userid', res.userid)
+      setCookie('cartid', res.cartid)
+    })
+  }, [])
+
+  async function onClick() {
+    const res = await fetch(
+      `http://localhost:3000/api/login/checkUser/${cookies.userid}`
+    )
+    const data = await res.json()
+    if (data.status == 'ACTIVE') {
+      Router.push('http://localhost:3000/userdashboard')
+    } else {
+      Router.push('http://localhost:3000/login')
+    }
+  }
+
   return (
     <div className="sticky z-10 top-0 px-4 sm:px-6 py-3 bg-cl1 text-cl2 w-screen font-gabriela grid grid-cols-1 place-items-center drop-shadow-xl">
       <div className="w-11/12 lg:w-5/6 max-w-7xl grid grid-cols-2">
@@ -53,7 +84,7 @@ function Header() {
           </div>
           <div className="pr-8" />
           <div className="transition ease-in-out border-b border-cl1 hover:border-cl3 hover:text-cl3">
-            <Link href="/login">Profil</Link>
+            <button onClick={onClick}>Profil</button>
           </div>
           <div className="pr-8" />
         </div>
@@ -92,7 +123,7 @@ function Header() {
               <Link href="/shoppingcart">Warenkorb</Link>
             </li>
             <li className="border-b border-gray-400 my-4">
-              <Link href="/login">Profil</Link>
+              <button onClick={onClick}>Profil</button>
             </li>
           </ul>
         </div>
