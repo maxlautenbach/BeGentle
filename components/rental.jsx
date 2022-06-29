@@ -3,6 +3,7 @@ import Link from 'next/link'
 import {useCookies} from 'react-cookie'
 
 function Rental(props) {
+  // eslint-disable-next-line no-unused-vars
   const [cookie, setCookie] = useCookies(['cookies'])
 
   function onClickReturn() {

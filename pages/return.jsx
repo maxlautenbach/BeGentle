@@ -119,7 +119,7 @@ export default function Return() {
                                     <ReactStars count={5} size={60} color2={'#C16666'} half={false} onChange={ratingChanged}/>
                                 </div>
 
-                                <div className=' place-items-center pl-3  sm:visible'>
+                                <div className=' place-items-center pl-3 hidden sm:contents'>
                                     <ReactStars count={5} size={100} color2={'#C16666'} half={false} onChange={ratingChanged}/>
                                 </div>
                                 

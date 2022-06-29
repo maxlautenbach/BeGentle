@@ -91,8 +91,7 @@ export default async function handler(req, res) {
         lastActivity: new Date(),
       },
     })
-{ message: 'Authenticated', userid: user.id })
-    }
+    
     
 
     if (usercart !== null) {

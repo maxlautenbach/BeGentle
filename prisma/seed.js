@@ -326,11 +326,16 @@ const InstrumentObjectData = [
     modelId: 1,
   },
   {
+    modelId: 1,
+  },
+  {
     currentlyRented: true,
     modelId: 2,
   },
   {
-    currentlyRented: true,
+    modelId: 2,
+  },
+  {
     modelId: 3,
   },
   {
@@ -370,15 +375,25 @@ const Rental = [
     instrumentObjectId: 1,
     userId: 1,
     duration: 12,
-    bookedAt: '2020-12-04T00:00:00.000Z',
-    rentalStart: '2020-12-04T00:00:00.000Z',
+    bookedAt: '2021-07-01T00:00:00.000Z',
+    rentalStart: '2021-07-04T00:00:00.000Z',
     rentalEnd: '2022-12-04T00:00:00.000Z',
     points: 334,
     orderId: 1,
     price: 304.99,
   },
+  {
+    instrumentObjectId: 3,
+    userId: 1,
+    duration: 6,
+    bookedAt: '2022-02-20T00:00:00.000Z',
+    rentalStart: '2022-02-25T00:00:00.000Z',
+    rentalEnd: '2022-08-25T00:00:00.000Z',
+    points: 124,
+    orderId: 1,
+    price: 149.99,
+  },
 ]
-
 const CategoryData = [
   {
     name: 'Streichinstrumente',
