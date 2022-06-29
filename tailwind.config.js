@@ -16,6 +16,7 @@ module.exports = {
         cl5: '#C16666',
         cl6: '#BBC9BD',
         cl7: '#CE9999',
+        cl8: '#C8B7B7',
       },
     },
   },
