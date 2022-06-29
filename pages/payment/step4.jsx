@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Cartitem from '../../components/cartitem'
 
-export default function Step2({ id }) {
+export default function Step4({ id, res_data }) {
+  const data = JSON.parse(res_data)
   function getExtra(price, rentalcount) {
     const ppi = price / rentalcount
     if (ppi == 0) {
-      return 'Care'
+      return 'Basic'
     } else if (ppi == 4.99) {
-      return 'Care+'
+      return 'Care'
     } else if (ppi == 12.99) {
-      return 'Care Ultimate'
+      return 'Care+'
     }
   }
   function getShipping(price) {
@@ -24,30 +25,16 @@ export default function Step2({ id }) {
   }
 
   const router = useRouter()
-  const [shippingFee, setShippingFee] = useState(0)
-  const [extraFee, setExtraFee] = useState(0)
-  const [rentalPrice, setRentalPrice] = useState(0)
-  const [monthlyPrice, setMonthlyPrice] = useState(0)
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [rentals, setRentals] = useState()
-  const [extras, setExtras] = useState()
-  const [shipping, setShipping] = useState()
-  useEffect(() => {
-    fetch('/api/rental/getOrder?orderid=' + id)
-      .then((res) => res.json())
-      .then((data) => {
-        setRentals(
-          data.rentals.map((item) => <Cartitem key={item.id}>{item}</Cartitem>)
-        )
-        setRentalPrice(data.rentalPrice)
-        setExtraFee(data.extraFee)
-        setShippingFee(data.shippingFee)
-        setMonthlyPrice(data.monthlyPrice)
-        setTotalPrice(data.totalPrice)
-        setExtras(getExtra(data.extraFee, data.rentalCount))
-        setShipping(getShipping(data.shippingFee))
-      })
-  }, [])
+  const [shippingFee] = useState(data.shippingFee)
+  const [extraFee] = useState(data.extraFee)
+  const [rentalPrice] = useState(data.rentalPrice)
+  const [monthlyPrice] = useState(data.monthlyPrice)
+  const [totalPrice] = useState(data.totalPrice)
+  const [rentals] = useState(
+    data.rentals.map((item) => <Cartitem key={item.id}>{item}</Cartitem>)
+  )
+  const [extras] = useState(getExtra(data.extraFee, data.rentalCount))
+  const [shipping] = useState(getShipping(data.shippingFee))
 
   return (
     <div className="bg-cl2 px-8 py-4 flex flex-col w-screen min-h-screen">
@@ -253,11 +240,19 @@ export default function Step2({ id }) {
   )
 }
 
-export function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   const id = context.query.id
+  var res_data = ''
+  await fetch('http://localhost:3000/api/rental/getOrder?orderid=' + id)
+    .then((res) => res.json())
+    .then((data) => {
+      res_data = data
+    })
+
   return {
     props: {
       id: id,
+      res_data: JSON.stringify(res_data),
     },
   }
 }

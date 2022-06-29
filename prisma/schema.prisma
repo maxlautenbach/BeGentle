@@ -28,7 +28,6 @@ model User {
   password              String?
   punkte                Int                 @default(0)
   phone                 String?
-  zahlungsinformationen String? //tbd
   role                  Role                @default(CUSTOMER)
   rentals               Rental[]
   shoppingCarts         ShoppingCart[]

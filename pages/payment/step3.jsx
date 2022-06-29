@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
-export default function Step2() {
+export default function Step2({ res_data }) {
+  const data = JSON.parse(res_data)
   const router = useRouter()
   const [cookies] = useCookies(['cookies'])
-  const cartid = cookies.cartid
-  const [shippingFee, setShippingFee] = useState(0)
-  const [extraFee, setExtraFee] = useState(0)
-  const [rentalPrice, setRentalPrice] = useState(0)
-  const [monthlyPrice, setMonthlyPrice] = useState(0)
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [shippingFee] = useState(data.shippingFee)
+  const [extraFee] = useState(data.extraFee)
+  const [rentalPrice] = useState(data.rentalPrice)
+  const [monthlyPrice] = useState(data.monthlyPrice)
+  const [totalPrice] = useState(data.totalPrice)
   const [cardnumber, setCardnumber] = useState('')
   const [cardowner, setCardowner] = useState('')
   const [carddate, setCarddate] = useState('')
@@ -23,17 +23,6 @@ export default function Step2() {
     'border-solid border-[1px] border-cl1 h-24 w-24 rounded-xl grid grid-cols-1 place-items-center overflow-hidden text-cl1'
   const inputCss =
     'w-full h-12 rounded-xl bg-cl4 drop-shadow-xl text-black text-xl focus:bg-cl2 transition ease-in-out outline-none px-4 py-4'
-  useEffect(() => {
-    fetch('/api/rental/getCart?cartid=' + cartid)
-      .then((res) => res.json())
-      .then((data) => {
-        setRentalPrice(data.rentalPrice)
-        setExtraFee(data.extraFee)
-        setShippingFee(data.shippingFee)
-        setMonthlyPrice(data.monthlyPrice)
-        setTotalPrice(data.totalPrice)
-      })
-  }, [])
 
   async function onClick() {
     const body = {
@@ -44,7 +33,7 @@ export default function Step2() {
       carddate: carddate,
       ccv: ccv,
     }
-    console.log('body')
+
     const res = await fetch(
       `http://localhost:3000/api/updatePaymentInformation`,
       {
@@ -323,7 +312,7 @@ export default function Step2() {
             </div>
           </div>
           <div
-            className={paymentVariant > 3 ? 'hidden' : 'px-6 py-4 w-full h-80'}
+            className={paymentVariant > 3 ? 'hidden' : 'px-6 py-4 w-full h-max'}
           >
             <a className="text-3xl lg:text-2xl font-bold">Zahldaten</a>
             <div className="h-full grid grid-cols-1 place-items-center">
@@ -368,9 +357,7 @@ export default function Step2() {
             </div>
           </div>
           <div
-            className={
-              paymentVariant > 3 ? 'px-6 py-4 w-full h-full' : 'hidden'
-            }
+            className={paymentVariant > 3 ? 'px-6 py-4 w-full h-max' : 'hidden'}
           >
             <a className="text-3xl lg:text-2xl font-bold">Zahldaten</a>
             <div className="h-80 text-center grid grid-cols-1 place-items-center">
@@ -438,4 +425,21 @@ export default function Step2() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const cookies = context.req.cookies
+  var res_data = ''
+  await fetch(
+    'http://localhost:3000/api/rental/getCart?cartid=' + cookies.cartid
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      res_data = data
+    })
+  return {
+    props: {
+      res_data: JSON.stringify(res_data),
+    },
+  }
 }
