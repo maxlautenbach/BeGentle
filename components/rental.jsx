@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import {useCookies} from 'react-cookie'
+import { useCookies } from 'react-cookie'
 
 function Rental(props) {
   // eslint-disable-next-line no-unused-vars
@@ -9,9 +9,8 @@ function Rental(props) {
   function onClickReturn() {
     setCookie('rentalid', props.children.id)
   }
-  
+
   return (
-    
     <li className="text-2xl py-6 w-max h-max">
       <div className="bg-cl1 rounded-2xl relative overflow-hidden lg:w-[450px] w-[335px] drop-shadow-2xl">
         <div className="grid grid-cols-2">
@@ -34,7 +33,9 @@ function Rental(props) {
               <div className="font-gabriela text-xs text-cl1 lg:text-base">
                 Abschied schon in
               </div>
-              <div className="font-gabriela text-md text-cl1 pl-3 lg:text-2xl">{props.children.returnInDays}</div>
+              <div className="font-gabriela text-md text-cl1 pl-3 lg:text-2xl">
+                {props.children.returnInDays}
+              </div>
               <div className="font-gabriela text-xs text-cl1 lg:text-base">
                 <span className="align-middle">Tagen</span>
               </div>
@@ -59,7 +60,10 @@ function Rental(props) {
         </div>
         <div className="m-3 md:mt-5">
           <Link href="/return">
-            <button onClick={onClickReturn} className=" text-base font-bold w-full text-cl1 bg-cl2 py-1 rounded-3xl lg:text-xl lg:py-2">
+            <button
+              onClick={onClickReturn}
+              className=" text-base font-bold w-full text-cl1 bg-cl2 py-1 rounded-3xl lg:text-xl lg:py-2"
+            >
               Instrument zurückgeben
             </button>
           </Link>

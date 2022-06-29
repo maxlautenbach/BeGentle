@@ -2,42 +2,37 @@ import * as React from 'react'
 
 function SvgComponent(props) {
   const stars = props.children
-  var star1 = "#c8b7b7";
-  var star2 = "#c8b7b7";
-  var star3 = "#c8b7b7";
-  var star4 = "#c8b7b7";
-  var star5 = "#c8b7b7";
-  if(stars==1){
-    star1 = "#ce9999"
-  }
-  else if (stars==2){
-    star1 = "#ce9999"
-    star2 = "#ce9999"
-  }
-  else if (stars==3){
-    star1 = "#ce9999"
-    star2 = "#ce9999"
-    star3 = "#ce9999"
-  }
-  else if (stars==4){
-    star1 = "#ce9999"
-    star2 = "#ce9999"
-    star3 = "#ce9999"
-    star4 = "#ce9999"
-  }
-  else if (stars==5){
-    star1 = "#ce9999"
-    star2 = "#ce9999"
-    star3 = "#ce9999"
-    star4 = "#ce9999"
-    star5 = "#ce9999"
+  var star1 = '#c8b7b7'
+  var star2 = '#c8b7b7'
+  var star3 = '#c8b7b7'
+  var star4 = '#c8b7b7'
+  var star5 = '#c8b7b7'
+  if (stars == 1) {
+    star1 = '#ce9999'
+  } else if (stars == 2) {
+    star1 = '#ce9999'
+    star2 = '#ce9999'
+  } else if (stars == 3) {
+    star1 = '#ce9999'
+    star2 = '#ce9999'
+    star3 = '#ce9999'
+  } else if (stars == 4) {
+    star1 = '#ce9999'
+    star2 = '#ce9999'
+    star3 = '#ce9999'
+    star4 = '#ce9999'
+  } else if (stars == 5) {
+    star1 = '#ce9999'
+    star2 = '#ce9999'
+    star3 = '#ce9999'
+    star4 = '#ce9999'
+    star5 = '#ce9999'
   }
   return (
     <svg
       viewBox="0 0 150.18929 150.18308"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
-      
     >
       <path
         d="M77.156.023l-.22 25.007c21.35.759 39.156 14.66 45.634 33.928l23.79-7.5C136.614 22.253 109.342.9 77.156.024zM114.68 16.51l2.138 6.364 6.951.371-5.392 4 1.795 6.726-5.47-3.893-5.842 3.786 2.011-6.405-5.406-4.386 6.714-.067z"

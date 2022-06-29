@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const rentalid = parseInt(req.query.rentalid)
   var data = await prisma.rental.findFirst({
     where: {
-      id: parseInt(rentalid)
+      id: parseInt(rentalid),
     },
     include: {
       instrumentObject: {
@@ -14,10 +14,10 @@ export default async function handler(req, res) {
           model: {
             select: {
               name: true,
-            }
-          }
+            },
+          },
         },
-      }
+      },
     },
   })
   console.log(data)

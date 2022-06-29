@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
 import { useState } from 'react'
 
-export default function DetailPage({instrument}) {
+export default function DetailPage({ instrument }) {
   console.log(instrument.stars)
   const router = useRouter()
   const listItems = instrument.description.map((description, index) => (
@@ -36,21 +36,17 @@ export default function DetailPage({instrument}) {
     }
   }
 
-  function onClickDuration1(){
-    setDuration(1),
-    setPrice(parseInt(2*instrument.priceInMonth))
+  function onClickDuration1() {
+    setDuration(1), setPrice(parseInt(2 * instrument.priceInMonth))
   }
-  function onClickDuration3(){
-    setDuration(3),
-    setPrice(parseInt(1.75*instrument.priceInMonth))
+  function onClickDuration3() {
+    setDuration(3), setPrice(parseInt(1.75 * instrument.priceInMonth))
   }
-  function onClickDuration6(){
-    setDuration(6),
-    setPrice(parseInt(1.4*instrument.priceInMonth))
+  function onClickDuration6() {
+    setDuration(6), setPrice(parseInt(1.4 * instrument.priceInMonth))
   }
-  function onClickDuration12(){
-    setDuration(12),
-    setPrice(parseInt(instrument.priceInMonth))
+  function onClickDuration12() {
+    setDuration(12), setPrice(parseInt(instrument.priceInMonth))
   }
 
   return (
@@ -90,9 +86,7 @@ export default function DetailPage({instrument}) {
               <span className="font-gabriela text-2xl text-cl5 py-1 md:text-4xl">
                 {price},00€
               </span>
-              <span className='text-md text-cl1 p-2 md:text-xl'>
-                im Monat
-              </span>
+              <span className="text-md text-cl1 p-2 md:text-xl">im Monat</span>
             </div>
             <div className="w-5/6 max-w-7xl text-xs text-cl1 py-1 md:text-lg md:py-8">
               <p>
@@ -112,21 +106,57 @@ export default function DetailPage({instrument}) {
             </div>
             <div className="z-1 w-5/6 max-w-7xl bg-cl1 rounded-xl place-items-center border-cl1 border-2 mb-3 mt-1 ">
               <div className="grid grid-cols-4 text-center bg-cl4 text-cl1 rounded-t-xl">
-                <button onClick={onClickDuration1} className={duration==1 ? 'rounded-t-xl py-1 bg-cl1 text-cl4' : 'rounded-t-xl py-1 bg-cl4'}>
+                <button
+                  onClick={onClickDuration1}
+                  className={
+                    duration == 1
+                      ? 'rounded-t-xl py-1 bg-cl1 text-cl4'
+                      : 'rounded-t-xl py-1 bg-cl4'
+                  }
+                >
                   <p className="text-s md:text-2xl md:font-semibold">1</p>
-                  <p className="text-xs font-light md:text-lg md:font-normal">Monate</p>
+                  <p className="text-xs font-light md:text-lg md:font-normal">
+                    Monate
+                  </p>
                 </button>
-                <button onClick={onClickDuration3} className={duration==3 ? 'rounded-t-xl py-1 bg-cl1 text-cl4' : 'rounded-t-xl py-1 bg-cl4'}>
+                <button
+                  onClick={onClickDuration3}
+                  className={
+                    duration == 3
+                      ? 'rounded-t-xl py-1 bg-cl1 text-cl4'
+                      : 'rounded-t-xl py-1 bg-cl4'
+                  }
+                >
                   <p className="text-s md:text-2xl md:font-semibold">3</p>
-                  <p className="text-xs font-light md:text-lg md:font-normal">Monate</p>
+                  <p className="text-xs font-light md:text-lg md:font-normal">
+                    Monate
+                  </p>
                 </button>
-                <button onClick={onClickDuration6} className={duration==6 ? 'rounded-t-xl py-1 bg-cl1 text-cl4' : 'rounded-t-xl py-1 bg-cl4'}>
+                <button
+                  onClick={onClickDuration6}
+                  className={
+                    duration == 6
+                      ? 'rounded-t-xl py-1 bg-cl1 text-cl4'
+                      : 'rounded-t-xl py-1 bg-cl4'
+                  }
+                >
                   <p className="text-s md:text-2xl md:font-semibold">6</p>
-                  <p className="text-xs font-light md:text-lg md:font-normal">Monate</p>
+                  <p className="text-xs font-light md:text-lg md:font-normal">
+                    Monate
+                  </p>
                 </button>
-                <button onClick={onClickDuration12} className={duration==12 ? 'rounded-t-xl py-1 bg-cl1 text-cl4' : 'rounded-t-xl py-1 bg-cl4'}>
+                <button
+                  onClick={onClickDuration12}
+                  className={
+                    duration == 12
+                      ? 'rounded-t-xl py-1 bg-cl1 text-cl4'
+                      : 'rounded-t-xl py-1 bg-cl4'
+                  }
+                >
                   <p className="text-s md:text-2xl md:font-semibold">12</p>
-                  <p className="text-xs font-light md:text-lg md:font-normal">Monate</p>
+                  <p className="text-xs font-light md:text-lg md:font-normal">
+                    Monate
+                  </p>
                 </button>
               </div>
               <button className="w-full" onClick={onClick}>
@@ -167,26 +197,34 @@ export default function DetailPage({instrument}) {
             </div>
           </div>
           <div className="text-left w-5/6 py-8">
-            <p className="font-gabriela text-xl md:text-3xl">Produktbeschreibung</p>
+            <p className="font-gabriela text-xl md:text-3xl">
+              Produktbeschreibung
+            </p>
             <ul className="list-disc m-4 text-xs md:text-xl">{listItems}</ul>
           </div>
         </div>
       </div>
       <div className="bg-cl2 border-t-3 border-cl1  ">
-        <div className='w-screen p-7 md:pl-24'>
+        <div className="w-screen p-7 md:pl-24">
           <div className="  text-xl pl-8 pr-3 md:text-2xl">
             <p className="py-2 font-gabriela mb-3 md:text-3xl">
               Unsere Kunden lieben dieses Instrument!
             </p>
             <div className="grid grid-cols-2 place-items-center max-w-6xl md:py-5">
               <ReviewSVG>{instrument.stars}</ReviewSVG>
-              <div className='place-content-center'>
-                <span className=' font-gabriela text-3xl text-cl5 pl-4 md:text-7xl md:pl-8 lg:text-9xl '>{instrument.stars}</span>
-                <span className='font-gabriela text-2xl text-cl5 pl-1 pr-3 md:text-5xl md:pr-6 lg:text-8xl '>/ 5</span>
-                <span className='text-cl5 font-gabriela text-2xl md:text-5xl lg:text-8xl'>Sterne</span>
+              <div className="place-content-center">
+                <span className=" font-gabriela text-3xl text-cl5 pl-4 md:text-7xl md:pl-8 lg:text-9xl ">
+                  {instrument.stars}
+                </span>
+                <span className="font-gabriela text-2xl text-cl5 pl-1 pr-3 md:text-5xl md:pr-6 lg:text-8xl ">
+                  / 5
+                </span>
+                <span className="text-cl5 font-gabriela text-2xl md:text-5xl lg:text-8xl">
+                  Sterne
+                </span>
               </div>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 py-8'>
+            <div className="grid grid-cols-1 md:grid-cols-2 py-8">
               <div className="text-cl5 py-1 md:py-3">
                 <p className="text-lg font-gabriela md:text-3xl">
                   {'"Klare Empfehlung, wunderbares Instrument"'}
@@ -194,7 +232,9 @@ export default function DetailPage({instrument}) {
                 <p className="text-xs md:text-xl">- Andreas Genet</p>
               </div>
               <div className="text-cl5 py-1 md:py-3">
-                <p className="text-lg font-gabriela md:text-3xl">{'"Wahnsinn"'}</p>
+                <p className="text-lg font-gabriela md:text-3xl">
+                  {'"Wahnsinn"'}
+                </p>
                 <p className="text-xs md:text-xl">- Anonym</p>
               </div>
               <div className="text-cl5 py-1 md:py-3">
@@ -211,7 +251,6 @@ export default function DetailPage({instrument}) {
               </div>
             </div>
           </div>
-        
         </div>
 
         <Footer />
