@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Rental" ALTER COLUMN "rentalStatus" SET DEFAULT E'DELIVERED';

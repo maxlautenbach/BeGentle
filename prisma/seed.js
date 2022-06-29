@@ -290,14 +290,47 @@ const InstrumentModelData = [
   },
 ]
 
+const Address = [
+  {
+    street: 'Coblitzallee',
+    city: 'Mannheim',
+    country: 'Deutschland',
+    userId: 1,
+  },
+]
+
+const User = [
+  {
+    status: 'ACTIVE',
+    lastname: 'Koellschen',
+    firstname: 'Franziska',
+    email: 'franziska.koellschen@mail.com',
+    password: 'password',
+    punkte: 1234,
+    phone: '015732033118',
+  },
+  {
+    status: 'ACTIVE',
+    lastname: 'Lautenbach',
+    firstname: 'Max',
+    email: 'm.lautenbach@mail.com',
+    password: 'password',
+    punkte: 1098,
+    phone: '015732034975',
+  },
+]
+
 const InstrumentObjectData = [
   {
+    currentlyRented: true,
     modelId: 1,
   },
   {
+    currentlyRented: true,
     modelId: 2,
   },
   {
+    currentlyRented: true,
     modelId: 3,
   },
   {
@@ -320,6 +353,29 @@ const InstrumentObjectData = [
   },
   {
     modelId: 10,
+  },
+]
+
+const Order = [
+  {
+    userId: 1,
+    rentalPrice: 300.0,
+    totalPrice: 304.99,
+    monthlyPrice: 25.0,
+  },
+]
+
+const Rental = [
+  {
+    instrumentObjectId: 1,
+    userId: 1,
+    duration: 12,
+    bookedAt: '2020-12-04T00:00:00.000Z',
+    rentalStart: '2020-12-04T00:00:00.000Z',
+    rentalEnd: '2022-12-04T00:00:00.000Z',
+    points: 334,
+    orderId: 1,
+    price: 304.99,
   },
 ]
 
@@ -366,6 +422,30 @@ async function main() {
       data: data,
     })
     console.log(`Created instrument object with id: ${instrumentObject.id}`)
+  }
+  for (const data of User) {
+    const user = await prisma.user.create({
+      data: data,
+    })
+    console.log(`Created instrument object with id: ${user.id}`)
+  }
+  for (const data of Address) {
+    const address = await prisma.address.create({
+      data: data,
+    })
+    console.log(`Created instrument object with id: ${address.id}`)
+  }
+  for (const data of Order) {
+    const order = await prisma.order.create({
+      data: data,
+    })
+    console.log(`Created instrument object with id: ${order.id}`)
+  }
+  for (const data of Rental) {
+    const rental = await prisma.rental.create({
+      data: data,
+    })
+    console.log(`Created instrument object with id: ${rental.id}`)
   }
   console.log(`Seeding finished.`)
 }

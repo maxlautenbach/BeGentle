@@ -42,7 +42,7 @@ export default async function handler(req, res) {
         },
       })
     }
-
+    
     const usercart = await prisma.shoppingCart.findFirst({
       where: {
         userId: user.id,
@@ -91,6 +91,10 @@ export default async function handler(req, res) {
         lastActivity: new Date(),
       },
     })
+{ message: 'Authenticated', userid: user.id })
+    }
+    
+
     if (usercart !== null) {
       res.status(200).json({
         message: 'Authenticated',
@@ -100,6 +104,7 @@ export default async function handler(req, res) {
     } else {
       res.status(200).json({ message: 'Authenticated', userid: user.id })
     }
+
   } else {
     res.status(404).json({ message: 'User/Password wrong' })
   }

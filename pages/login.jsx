@@ -10,8 +10,10 @@ export default function Login({ referer }) {
   const [password, setPassword] = useState()
   const [cookies, setCookie] = useCookies(['cookies'])
 
+
   async function auth() {
     if (referer.includes('shoppingcart')) {
+
       const body = {
         id: id,
         password: password,
@@ -31,6 +33,24 @@ export default function Login({ referer }) {
         Router.push('http://localhost:3000/payment/step1')
       }
     } else {
+      const body = {
+        id: id,
+        password: password,
+      }
+      const res = await fetch(`http://localhost:3000/api/login/auth`, {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(body),
+      })
+      const data = await res.json()
+      alert(data.message)
+      if (res.status == 200) {
+        setCookie('userid', data.userid)
+        alert('Redirect')
+        Router.push('http://localhost:3000/userdashboard')
+      }
+    }
+    else {
       const body = {
         id: id,
         password: password,
@@ -93,6 +113,7 @@ export default function Login({ referer }) {
                     </button>
                   </Link>
                   <div className="py-2" />
+
                   <Link href="http://localhost:3000/payment/step1">
                     <button
                       className={
@@ -104,6 +125,7 @@ export default function Login({ referer }) {
                       Als Gast Bestellen
                     </button>
                   </Link>
+
                 </div>
               </div>
             </div>
