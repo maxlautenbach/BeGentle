@@ -1,10 +1,13 @@
 # Quickstart
+
 ## Prerequisits
+
 - Docker
 - node v16.14.0
 - yarn - Install with: `npm install -g yarn`
 
 ## Start Up the Full Stack
+
 `yarn cleanbuild`
 
 ## Recommended Plugins
@@ -13,7 +16,6 @@
 - ESLint
 - Prisma
 - Tailwind
-
 
 ## Getting Started
 
