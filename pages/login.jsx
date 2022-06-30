@@ -34,6 +34,7 @@ export default function Login({ referer }) {
       const body = {
         id: id,
         password: password,
+        tempcartid: cookies.cartid,
       }
       const res = await fetch(`http://localhost:3000/api/login/auth`, {
         method: 'POST',
