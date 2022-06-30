@@ -3,13 +3,15 @@ import Footer from '../components/footer'
 import Cartitem from '../components/cartitem'
 import { useCookies } from 'react-cookie'
 import { useState } from 'react'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 
 export default function Shoppingcart({ data, res_rentals }) {
+  const router = useRouter()
   data = JSON.parse(data)
   const [rentals] = useState(
     res_rentals.map((item) => <Cartitem key={item.id}>{item}</Cartitem>)
   )
+  const rentalcount = res_rentals.length
   const [cookies] = useCookies(['cookies'])
   async function onClick() {
     const res = await fetch(
@@ -27,7 +29,13 @@ export default function Shoppingcart({ data, res_rentals }) {
       <div className="w-screen h-screen bg-cl2 flex flex-col">
         <Header />
         <div className="flex-grow grid grid-cols-1 place-items-center">
-          <div className="w-screen sm:w-11/12 lg:w-5/6 max-w-7xl h-full sm:h-5/6 sm:rounded-xl flex overflow-hidden">
+          <div
+            className={
+              rentalcount == 0
+                ? 'hidden'
+                : 'w-screen sm:w-11/12 lg:w-5/6 max-w-7xl h-full sm:h-5/6 sm:rounded-xl flex overflow-hidden'
+            }
+          >
             <div className="bg-cl4 w-full" id="cartoverview">
               <div className="flex flex-col h-full">
                 <div className="px-8 py-8 font-gabriela text-3xl border-solid border-b-[1px] border-b-black pb-4">
@@ -58,6 +66,28 @@ export default function Shoppingcart({ data, res_rentals }) {
                   </div>
                   <div className="pt-4" />
                 </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className={
+              rentalcount == 0
+                ? 'w-screen sm:w-11/12 lg:w-5/6 max-w-7xl h-full sm:h-5/6 sm:rounded-xl flex overflow-hidden'
+                : 'hidden'
+            }
+          >
+            <div className="bg-cl4 w-full h-full grid grid-cols-1 place-items-center text-center px-4">
+              <div>
+                <div className="w-full text-xl font-gabriela text-cl1 py-4 text-center">
+                  Du musst zunächst etwas einkaufen, um deine Auswahl bestaunen
+                  zu können.
+                </div>
+                <button
+                  className="w-full bg-cl1 text-cl2 p-2 rounded-xl text-lg font-gabriela"
+                  onClick={() => router.push('/')}
+                >
+                  Zurück zum Shop
+                </button>
               </div>
             </div>
           </div>
