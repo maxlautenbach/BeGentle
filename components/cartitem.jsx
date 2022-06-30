@@ -6,7 +6,9 @@ function Cartitem(props) {
   const rental = props.children
   const model = props.children.instrumentObject.model
   async function onClick() {
-    const res = await fetch(`http://localhost:3000/api/rental/deleteRental?rentalid=${rental.id}`)
+    const res = await fetch(
+      `http://localhost:3000/api/rental/deleteRental?rentalid=${rental.id}`
+    )
     const data = await res.json()
     if (data.message == 'Successful') {
       router.reload(window.location.pathname)
@@ -23,7 +25,10 @@ function Cartitem(props) {
             objectFit="cover"
           />
         </div>
-        <button className="absolute px-2 py-1 z-10 text-cl2 inline-block font-black bg-cl3 rounded-tl-xl rounded-br-xl" onClick={onClick}>
+        <button
+          className="absolute px-2 py-1 z-10 text-cl2 inline-block font-black bg-cl3 rounded-tl-xl rounded-br-xl"
+          onClick={onClick}
+        >
           x
         </button>
         <div className="h-max p-2 flex-grow flex flex-col justify-between">
