@@ -31,7 +31,11 @@ export default function Step4({ id, res_data }) {
   const [monthlyPrice] = useState(data.monthlyPrice)
   const [totalPrice] = useState(data.totalPrice)
   const [rentals] = useState(
-    data.rentals.map((item) => <Cartitem key={item.id} referal="finish">{item}</Cartitem>)
+    data.rentals.map((item) => (
+      <Cartitem key={item.id} referal="finish">
+        {item}
+      </Cartitem>
+    ))
   )
   const [extras] = useState(getExtra(data.extraFee, data.rentalCount))
   const [shipping] = useState(getShipping(data.shippingFee))

@@ -156,14 +156,16 @@ export default function DetailPage({ instrument }) {
                 </p>
               </button>
             </div>
-            <button onClick={() => {
+            <button
+              onClick={() => {
                 window.scrollTo({
                   top: screen.height,
                   behavior: 'smooth',
                   /* you can also use 'auto' behaviour
          in place of 'smooth' */
                 })
-              }}>
+              }}
+            >
               <div>
                 <p className="text-cl1 font-gabriela text-lg text-center pt-3 md:text-2xl md:pt-7">
                   Mehr Details

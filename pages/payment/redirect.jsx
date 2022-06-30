@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-export default function Redirect({text, path}) {
+export default function Redirect({ text, path }) {
   const router = useRouter()
   function loadingFinished() {
     router.push(path)
@@ -29,9 +29,7 @@ export default function Redirect({text, path}) {
               fill="currentFill"
             />
           </svg>
-          <div className="pt-4 text-2xl font-gabriela text-cl1">
-            {text}
-          </div>
+          <div className="pt-4 text-2xl font-gabriela text-cl1">{text}</div>
         </div>
       </div>
     </div>
@@ -40,8 +38,8 @@ export default function Redirect({text, path}) {
 
 export async function getServerSideProps(context) {
   var status = context.query.status
-  var path = "/shoppingcart"
-  if(status == "successful"){
+  var path = '/shoppingcart'
+  if (status == 'successful') {
     const orderBody = {
       cartid: parseInt(context.req.cookies.cartid),
       userid: parseInt(context.req.cookies.userid),
@@ -56,11 +54,14 @@ export async function getServerSideProps(context) {
       path = `/payment/step4?id=${orderData.id}`
     }
   }
-  const text = status == "successful" ? "Vielen Dank für ihre Bestellung" : "Ihre Zahlung ist fehlgeschlagen, sie werden zurück auf Ihren Warenkorb geleitet."
+  const text =
+    status == 'successful'
+      ? 'Vielen Dank für ihre Bestellung'
+      : 'Ihre Zahlung ist fehlgeschlagen, sie werden zurück auf Ihren Warenkorb geleitet.'
   return {
     props: {
       text: text,
-      path: path
+      path: path,
     },
   }
 }

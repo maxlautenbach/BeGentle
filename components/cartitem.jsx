@@ -26,7 +26,11 @@ function Cartitem(props) {
           />
         </div>
         <button
-          className={props.referal == "finish" ? "hidden" : "absolute px-2 py-1 z-10 text-cl2 inline-block font-black bg-cl3 rounded-tl-xl rounded-br-xl"}
+          className={
+            props.referal == 'finish'
+              ? 'hidden'
+              : 'absolute px-2 py-1 z-10 text-cl2 inline-block font-black bg-cl3 rounded-tl-xl rounded-br-xl'
+          }
           onClick={onClick}
         >
           x
