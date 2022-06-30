@@ -1,0 +1,39 @@
+async function createProduct() {
+    const product = await stripe.products.create({ name: 'Gold Special' });
+    return product.id
+}
+
+async function createPrice(id) {
+    const price = await stripe.prices.create({
+        product: id,
+        unit_amount: 1000,
+        currency: 'eur',
+    })
+    return price
+}
+
+async function createCustomer() {
+    const customer = await stripe.customers.create({
+        name: 'Jenny Rosen',
+        email: 'jenny.rosen@example.com',
+        description: 'My first customer',
+    });
+    console.log(customer)
+    return customer
+}
+
+async function createInvoice(customerId, priceId) {
+    const invoiceItem = await stripe.invoiceItems.create({
+        customer: customerId,
+        price: priceId,
+    });
+    console.log(invoiceItem)
+}
+
+async function workflow() {
+    const customer = await createCustomer()
+
+    const productId = await createProduct()
+    const price = await createPrice(productId)
+    await createInvoice(customer.id, price.id)
+}

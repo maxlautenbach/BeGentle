@@ -13,7 +13,7 @@ export default function Step2({ res_data, user_data }) {
   const [monthlyPrice] = useState(data.monthlyPrice)
   const [totalPrice] = useState(data.totalPrice)
   const [firstname, setFirstname] = useState(userdata.data.firstname)
-  const [surname, setSurname] = useState(userdata.data.surname)
+  const [lastname, setlastname] = useState(userdata.data.lastname)
   const [email, setEmail] = useState(userdata.data.email)
   const [confirmEmail, setConfirmEmail] = useState(userdata.data.email)
   const [phone, setPhone] = useState(userdata.data.phone)
@@ -28,29 +28,86 @@ export default function Step2({ res_data, user_data }) {
       ? 'Deutschland'
       : userdata.data.address.country
   )
+  const [error, setError] = useState('')
 
   const inputCss =
     'w-full h-12 rounded-xl bg-cl4 drop-shadow-xl text-black text-xl focus:bg-cl2 transition ease-in-out outline-none px-4 py-4'
 
-  async function onClick() {
-    const body = {
-      userid: cookies.userid,
-      firstname: firstname,
-      surname: surname,
-      email: email,
-      street: street,
-      city: city,
-      country: country,
-      phone: phone,
-    }
-    const res = await fetch(`http://localhost:3000/api/login/updateUser`, {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(body),
+  function scrollTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+      /* you can also use 'auto' behaviour
+in place of 'smooth' */
     })
-    const data = await res.json()
-    if (data.message == 'Successful') {
-      router.push('/payment/step3')
+  }
+
+  async function onClick() {
+    var failure = false
+    var newError = ''
+    if (firstname == null || firstname == '') {
+      failure = true
+      newError += 'Kein Vorname angegeben.\n'
+    }
+    if (lastname == null || lastname == '') {
+      failure = true
+      newError += 'Kein Nachname angegeben.\n'
+    }
+    if (email == null || email == '') {
+      failure = true
+      newError += 'Keine E-Mail angegeben.\n'
+    }
+    if (
+      !email?.match(
+        // eslint-disable-next-line no-control-regex
+        /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+      )
+    ) {
+      failure = true
+      newError += 'E-Mail falsch.\n'
+    }
+    if (email != confirmEmail) {
+      failure = true
+      newError += 'Mail bestätigung falsch!\n'
+    }
+    if (phone == null || phone == '') {
+      failure = true
+      newError += 'Keine Telefonnummer angegeben.\n'
+    }
+    if (
+      street == null ||
+      street == '' ||
+      city == null ||
+      city == '' ||
+      country == null ||
+      country == ''
+    ) {
+      failure = true
+      newError += 'Keine vollständige Addresse angegeben.\n'
+    }
+    if (failure) {
+      setError(newError)
+      scrollTop()
+    } else {
+      const body = {
+        userid: cookies.userid,
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        street: street,
+        city: city,
+        country: country,
+        phone: phone,
+      }
+      const res = await fetch(`http://localhost:3000/api/login/updateUser`, {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(body),
+      })
+      const data = await res.json()
+      if (data.message == 'Successful') {
+        router.push('/payment/step3')
+      }
     }
   }
 
@@ -205,18 +262,27 @@ export default function Step2({ res_data, user_data }) {
           <a className="text-3xl lg:text-2xl font-bold px-6 py-4 lg:col-span-2">
             Kontaktdaten
           </a>
+          <a
+            className={
+              error == ''
+                ? 'hidden'
+                : 'font-bold px-6 lg:col-span-2 text-red-600 whitespace-pre-line'
+            }
+          >
+            {error}
+          </a>
           <div className="px-6 pb-4 w-full">
             <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Vorname:</div>
             <input
               className={inputCss}
               defaultValue={firstname}
-              onChange={(e) => setFirstname(e.target.value)}
+              onChange={(e) => (setError(''), setFirstname(e.target.value))}
             />
             <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Name:</div>
             <input
               className={inputCss}
-              defaultValue={surname}
-              onChange={(e) => setSurname(e.target.value)}
+              defaultValue={lastname}
+              onChange={(e) => (setError(''), setlastname(e.target.value))}
             />
             <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
               E-Mail Adresse:
@@ -224,7 +290,7 @@ export default function Step2({ res_data, user_data }) {
             <input
               className={inputCss}
               defaultValue={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => (setError(''), setEmail(e.target.value))}
             />
             <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
               E-Mail Adresse bestätigen:
@@ -232,7 +298,7 @@ export default function Step2({ res_data, user_data }) {
             <input
               className={inputCss}
               defaultValue={confirmEmail}
-              onChange={(e) => setConfirmEmail(e.target.value)}
+              onChange={(e) => (setError(''), setConfirmEmail(e.target.value))}
             />
           </div>
           <div className="px-6 pb-4 w-full">
@@ -242,27 +308,27 @@ export default function Step2({ res_data, user_data }) {
             <input
               className={inputCss}
               defaultValue={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => (setError(''), setPhone(e.target.value))}
             />
             <div className="pl-4 pt-4 pb-1 text-cl1 font-light">
-              Strasse+Hausnummer:
+              Strasse + Hausnummer:
             </div>
             <input
               className={inputCss}
               defaultValue={street}
-              onChange={(e) => setStreet(e.target.value)}
+              onChange={(e) => (setError(''), setStreet(e.target.value))}
             />
-            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">PLZ+Ort:</div>
+            <div className="pl-4 pt-4 pb-1 text-cl1 font-light">PLZ + Ort:</div>
             <input
               className={inputCss}
               defaultValue={city}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => (setError(''), setCity(e.target.value))}
             />
             <div className="pl-4 pt-4 pb-1 text-cl1 font-light">Land:</div>
             <input
               className={inputCss}
               defaultValue={country}
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={(e) => (setError(''), setCountry(e.target.value))}
             />
           </div>
           <div

@@ -31,7 +31,7 @@ export default function Step4({ id, res_data }) {
   const [monthlyPrice] = useState(data.monthlyPrice)
   const [totalPrice] = useState(data.totalPrice)
   const [rentals] = useState(
-    data.rentals.map((item) => <Cartitem key={item.id}>{item}</Cartitem>)
+    data.rentals.map((item) => <Cartitem key={item.id} referal="finish">{item}</Cartitem>)
   )
   const [extras] = useState(getExtra(data.extraFee, data.rentalCount))
   const [shipping] = useState(getShipping(data.shippingFee))
@@ -196,7 +196,7 @@ export default function Step4({ id, res_data }) {
           <div className="w-full border-b-[1px] border-solid border-cl1 text-center text-cl1">
             Versandart: {shipping}
           </div>
-          <ul className="w-full flex flex-col sm:flex-row place-items-center flex-grow h-80 sm:overflow-x-scroll overflow-y-scroll 2xl:px-4">
+          <ul className="w-full flex flex-col sm:flex-row place-items-center flex-grow h-96 sm:overflow-x-scroll overflow-y-scroll sm:overflow-y-none 2xl:px-4">
             {rentals}
           </ul>
           <div className="w-full grid grid-cols-1 place-items-end pb-1 font-light text-cl1">

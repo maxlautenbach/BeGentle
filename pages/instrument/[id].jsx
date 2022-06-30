@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Footer from '../../components/footer'
 import Header from '../../components/header'
 import Head from 'next/head'
-import Link from 'next/link'
 import ReviewSVG from '../../components/reviewSVG'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
@@ -63,7 +62,7 @@ export default function DetailPage({ instrument }) {
       >
         <div className="w-full h-screen flex flex-col">
           <Header />
-          <div className="w-full flex-grow">
+          <div className="w-full flex-grow" id="image">
             <div className="-z-10 overflow-hidden h-max w-max bg-gradient-to-b from-black to-white bg-cover pointer-events-none">
               <Image
                 src="/detailViolin.png"
@@ -79,7 +78,7 @@ export default function DetailPage({ instrument }) {
             className="z-1 w-full h-max bg-cl4 rounded-t-xl grid grid-cols-1  place-items-center"
             id="Buybox"
           >
-            <div className="w-5/6 max-w-7xl font-gabriela text-2xl text-cl1 py-4 md:text-5xl md:py-8">
+            <div className="w-5/6 max-w-7xl font-gabriela text-2xl text-cl1 py-4">
               {instrument.name}
             </div>
             <div className="w-5/6 max-w-7xl ">
@@ -88,7 +87,7 @@ export default function DetailPage({ instrument }) {
               </span>
               <span className="text-md text-cl1 p-2 md:text-xl">im Monat</span>
             </div>
-            <div className="w-5/6 max-w-7xl text-xs text-cl1 py-1 md:text-lg md:py-8">
+            <div className="w-5/6 max-w-7xl text-xs text-cl1 py-1">
               <p>
                 <span>BeGentle! Care </span>
                 <span className="text-cl5">inklusive.</span>
@@ -114,10 +113,8 @@ export default function DetailPage({ instrument }) {
                       : 'rounded-t-xl py-1 bg-cl4'
                   }
                 >
-                  <p className="text-s md:text-2xl md:font-semibold">1</p>
-                  <p className="text-xs font-light md:text-lg md:font-normal">
-                    Monate
-                  </p>
+                  <p className="text-s">1</p>
+                  <p className="text-xs font-light">Monate</p>
                 </button>
                 <button
                   onClick={onClickDuration3}
@@ -127,10 +124,8 @@ export default function DetailPage({ instrument }) {
                       : 'rounded-t-xl py-1 bg-cl4'
                   }
                 >
-                  <p className="text-s md:text-2xl md:font-semibold">3</p>
-                  <p className="text-xs font-light md:text-lg md:font-normal">
-                    Monate
-                  </p>
+                  <p className="text-s">3</p>
+                  <p className="text-xs font-light">Monate</p>
                 </button>
                 <button
                   onClick={onClickDuration6}
@@ -140,10 +135,8 @@ export default function DetailPage({ instrument }) {
                       : 'rounded-t-xl py-1 bg-cl4'
                   }
                 >
-                  <p className="text-s md:text-2xl md:font-semibold">6</p>
-                  <p className="text-xs font-light md:text-lg md:font-normal">
-                    Monate
-                  </p>
+                  <p className="text-s">6</p>
+                  <p className="text-xs font-light">Monate</p>
                 </button>
                 <button
                   onClick={onClickDuration12}
@@ -153,19 +146,24 @@ export default function DetailPage({ instrument }) {
                       : 'rounded-t-xl py-1 bg-cl4'
                   }
                 >
-                  <p className="text-s md:text-2xl md:font-semibold">12</p>
-                  <p className="text-xs font-light md:text-lg md:font-normal">
-                    Monate
-                  </p>
+                  <p className="text-s">12</p>
+                  <p className="text-xs font-light">Monate</p>
                 </button>
               </div>
               <button className="w-full" onClick={onClick}>
-                <p className="text-cl4 text-center p-3 hover:bg-cl6 hover:text-cl1 rounded-b-xl transition ease-in-out md:text-3xl md:p-5 ">
+                <p className="text-cl4 text-center p-3 hover:bg-cl6 hover:text-cl1 rounded-b-xl transition ease-in-out">
                   Jetzt ausleihen!
                 </p>
               </button>
             </div>
-            <Link href="#Description" scroll={true}>
+            <button onClick={() => {
+                window.scrollTo({
+                  top: screen.height,
+                  behavior: 'smooth',
+                  /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+                })
+              }}>
               <div>
                 <p className="text-cl1 font-gabriela text-lg text-center pt-3 md:text-2xl md:pt-7">
                   Mehr Details
@@ -181,20 +179,30 @@ export default function DetailPage({ instrument }) {
                   />
                 </div>
               </div>
-            </Link>
+            </button>
           </div>
         </div>
         <div
-          className="z-1 w-full h-max bg-cl4 rounded-t-xl grid grid-cols-1  place-items-center"
+          className="z-1 w-full h-max bg-cl4 rounded-t-xl grid grid-cols-1 place-items-center"
           id="Description"
         >
-          <div className="w-screen grid grid-cols-2 text-center md:place-content-center md:pt-5">
-            <div className="bg-cl1 text-cl4 font-gabriela p-2 md:text-xl md:py-5">
+          <div className="w-screen grid grid-cols-2 text-center place-items-center">
+            <div className="bg-cl1 text-cl4 font-gabriela p-2 md:text-xl md:py-5 w-full h-full flex justify-center items-center">
               {instrument.name}
             </div>
-            <div className="bg-cl5 text-cl4 font-gabriela p-2 align-middel md:text-xl md:py-5">
-              Jetzt Mieten: {instrument.priceInMonth},00€
-            </div>
+            <button
+              className="bg-cl5 text-cl4 font-gabriela p-2 md:text-xl md:py-5 w-full h-full flex justify-center items-center"
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth',
+                  /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+                })
+              }}
+            >
+              <p>Jetzt Mieten: {instrument.priceInMonth},00€</p>
+            </button>
           </div>
           <div className="text-left w-5/6 py-8">
             <p className="font-gabriela text-xl md:text-3xl">

@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-export default function Redirect({ id }) {
+export default function Redirect({text, path}) {
   const router = useRouter()
   function loadingFinished() {
-    router.push(`/payment/step4?id=${id}`)
+    router.push(path)
   }
   useEffect(() => {
     setTimeout(loadingFinished, 2000)
@@ -30,7 +30,7 @@ export default function Redirect({ id }) {
             />
           </svg>
           <div className="pt-4 text-2xl font-gabriela text-cl1">
-            Ihre Zahlung wird bearbeitet.
+            {text}
           </div>
         </div>
       </div>
@@ -38,11 +38,29 @@ export default function Redirect({ id }) {
   )
 }
 
-export function getServerSideProps(context) {
-  const id = context.query.id
+export async function getServerSideProps(context) {
+  var status = context.query.status
+  var path = "/shoppingcart"
+  if(status == "successful"){
+    const orderBody = {
+      cartid: parseInt(context.req.cookies.cartid),
+      userid: parseInt(context.req.cookies.userid),
+    }
+    const res = await fetch(`http://localhost:3000/api/rental/issueOrder`, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(orderBody),
+    })
+    const orderData = await res.json()
+    if (orderData.message == 'Successful') {
+      path = `/payment/step4?id=${orderData.id}`
+    }
+  }
+  const text = status == "successful" ? "Vielen Dank für ihre Bestellung" : "Ihre Zahlung ist fehlgeschlagen, sie werden zurück auf Ihren Warenkorb geleitet."
   return {
     props: {
-      id: id,
+      text: text,
+      path: path
     },
   }
 }

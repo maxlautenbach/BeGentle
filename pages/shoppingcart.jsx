@@ -9,7 +9,7 @@ export default function Shoppingcart({ data, res_rentals }) {
   const router = useRouter()
   data = JSON.parse(data)
   const [rentals] = useState(
-    res_rentals.map((item) => <Cartitem key={item.id}>{item}</Cartitem>)
+    res_rentals.map((item) => <Cartitem key={item.id} referal="shoppingcart">{item}</Cartitem>)
   )
   const rentalcount = res_rentals.length
   const [cookies] = useCookies(['cookies'])

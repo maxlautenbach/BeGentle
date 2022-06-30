@@ -1,65 +1,15 @@
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 export default function Step2({ res_data }) {
   const data = JSON.parse(res_data)
-  const router = useRouter()
   const [cookies] = useCookies(['cookies'])
   const [shippingFee] = useState(data.shippingFee)
   const [extraFee] = useState(data.extraFee)
   const [rentalPrice] = useState(data.rentalPrice)
   const [monthlyPrice] = useState(data.monthlyPrice)
   const [totalPrice] = useState(data.totalPrice)
-  const [cardnumber, setCardnumber] = useState('')
-  const [cardowner, setCardowner] = useState('')
-  const [carddate, setCarddate] = useState('')
-  const [ccv, setCCV] = useState('')
-  const [paymentVariant, setPaymentVariant] = useState(1)
-  const activeButton =
-    'border-solid border-[1px] border-cl1 h-24 w-24 rounded-xl grid grid-cols-1 place-items-center overflow-hidden text-cl2 bg-cl1'
-  const passiveButton =
-    'border-solid border-[1px] border-cl1 h-24 w-24 rounded-xl grid grid-cols-1 place-items-center overflow-hidden text-cl1'
-  const inputCss =
-    'w-full h-12 rounded-xl bg-cl4 drop-shadow-xl text-black text-xl focus:bg-cl2 transition ease-in-out outline-none px-4 py-4'
-
-  async function onClick() {
-    const body = {
-      userid: cookies.userid,
-      variant: paymentVariant,
-      cardowner: cardowner,
-      cardnumber: cardnumber,
-      carddate: carddate,
-      ccv: ccv,
-    }
-
-    const res = await fetch(
-      `http://localhost:3000/api/updatePaymentInformation`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(body),
-      }
-    )
-    const data = await res.json()
-
-    if (data.message == 'Successful') {
-      const orderBody = {
-        cartid: parseInt(cookies.cartid),
-        userid: parseInt(cookies.userid),
-      }
-      const res = await fetch(`http://localhost:3000/api/rental/issueOrder`, {
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(orderBody),
-      })
-      const orderData = await res.json()
-      if (orderData.message == 'Successful') {
-        router.push(`/payment/redirect?id=${orderData.id}`)
-      }
-    }
-  }
 
   return (
     <div className="bg-cl2 px-8 py-4 flex flex-col w-screen min-h-screen">
@@ -208,158 +158,9 @@ export default function Step2({ res_data }) {
         </svg>
       </div>
       <div className="w-full flex flex-row justify-center">
-        <div className="bg-cl4 grid grid-cols-1 lg:grid-cols-2 rounded-xl overflow-hidden max-w-5xl">
-          <div className="px-6 py-4 w-full">
-            <a className="text-3xl lg:text-2xl font-bold">Zahlart</a>
-            <div className="grid grid-cols-1 place-items-center h-80">
-              <div className="grid grid-cols-3 place-items-center">
-                <div className="px-2 py-4">
-                  <button
-                    className={
-                      paymentVariant == 1 ? activeButton : passiveButton
-                    }
-                    onClick={() => setPaymentVariant(1)}
-                  >
-                    <span />
-                    <div className="h-full w-full py-3 overflow-hidden relative">
-                      <Image
-                        src="/icons/payment/Mastercard_2019_logo.svg"
-                        alt="Leider gibt es zu diesem Instrument kein Bild"
-                        layout="fill"
-                        objectFit="contain"
-                      />
-                    </div>
-                    <a className="font-light text-sm ">Mastercard</a>
-                  </button>
-                </div>
-
-                <button
-                  className={paymentVariant == 2 ? activeButton : passiveButton}
-                  onClick={() => setPaymentVariant(2)}
-                >
-                  <span />
-                  <div className="h-full w-full py-3 overflow-hidden relative">
-                    <Image
-                      src="/icons/payment/visa.png"
-                      alt="Leider gibt es zu diesem Instrument kein Bild"
-                      layout="fill"
-                      objectFit="contain"
-                    />
-                  </div>
-                  <a className="font-light text-sm">Visa</a>
-                </button>
-                <button
-                  className={paymentVariant == 3 ? activeButton : passiveButton}
-                  onClick={() => setPaymentVariant(3)}
-                >
-                  <span />
-                  <div className="h-full w-full py-3 overflow-hidden relative">
-                    <Image
-                      src="/icons/payment/american-express.png"
-                      alt="Leider gibt es zu diesem Instrument kein Bild"
-                      layout="fill"
-                      objectFit="contain"
-                    />
-                  </div>
-                  <a className="font-light text-sm">American Express</a>
-                </button>
-                <button
-                  className={paymentVariant == 4 ? activeButton : passiveButton}
-                  onClick={() => setPaymentVariant(4)}
-                >
-                  <span />
-                  <div className="h-full w-full py-3 overflow-hidden relative">
-                    <Image
-                      src="/icons/payment/paypal.png"
-                      alt="Leider gibt es zu diesem Instrument kein Bild"
-                      layout="fill"
-                      objectFit="contain"
-                    />
-                  </div>
-                  <a className="font-light text-sm">PayPal</a>
-                </button>
-                <button
-                  className={paymentVariant == 5 ? activeButton : passiveButton}
-                  onClick={() => setPaymentVariant(5)}
-                >
-                  <span />
-                  <div className="h-full w-full py-3 overflow-hidden relative">
-                    <Image
-                      src="/icons/payment/apple-pay.png"
-                      alt="Leider gibt es zu diesem Instrument kein Bild"
-                      layout="fill"
-                      objectFit="contain"
-                    />
-                  </div>
-                  <a className="font-light text-sm">Apple Pay</a>
-                </button>
-                <button
-                  className={paymentVariant == 6 ? activeButton : passiveButton}
-                  onClick={() => setPaymentVariant(6)}
-                >
-                  <span />
-                  <div className="h-full w-full py-3 overflow-hidden relative">
-                    <Image
-                      src="/icons/payment/google-pay.png"
-                      alt="Leider gibt es zu diesem Instrument kein Bild"
-                      layout="fill"
-                      objectFit="contain"
-                    />
-                  </div>
-                  <a className="font-light text-sm">Google Pay</a>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div
-            className={paymentVariant > 3 ? 'hidden' : 'px-6 py-4 w-full h-max'}
-          >
-            <a className="text-3xl lg:text-2xl font-bold">Zahldaten</a>
-            <div className="h-full grid grid-cols-1 place-items-center">
-              <div className="pl-4 pt-4 pb-1 text-cl1 font-light w-full">
-                Kreditkartennummer:
-              </div>
-              <input
-                className={inputCss}
-                defaultValue={cardnumber}
-                onChange={(e) => setCardnumber(e.target.value)}
-              />
-              <div className="pl-4 pt-4 pb-1 text-cl1 font-light w-full">
-                Inhaber:
-              </div>
-              <input
-                className={inputCss}
-                defaultValue={cardowner}
-                onChange={(e) => setCardowner(e.target.value)}
-              />
-              <div className="grid grid-cols-2 place-items-center">
-                <div className="pl-4 pt-4 pb-1 w-full text-cl1 font-light">
-                  Ablaufdatum:
-                </div>
-                <div className="pl-4 pt-4 pb-1 w-full text-cl1 font-light">
-                  CCV:
-                </div>
-                <div className="w-full pr-2">
-                  <input
-                    className="w-full h-12 rounded-xl bg-cl4 drop-shadow-xl text-black text-xl focus:bg-cl2 transition ease-in-out outline-none px-4 py-4"
-                    defaultValue={carddate}
-                    onChange={(e) => setCarddate(e.target.value)}
-                  />
-                </div>
-                <div className="w-full pl-2">
-                  <input
-                    className="w-full h-12 rounded-xl bg-cl4 drop-shadow-xl text-black text-xl focus:bg-cl2 transition ease-in-out outline-none px-4 py-4"
-                    defaultValue={ccv}
-                    onChange={(e) => setCCV(e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className={paymentVariant > 3 ? 'px-6 py-4 w-full h-max' : 'hidden'}
-          >
-            <a className="text-3xl lg:text-2xl font-bold">Zahldaten</a>
+        <div className="bg-cl4 grid grid-cols-1 rounded-xl overflow-hidden max-w-5xl">
+          <div className={'px-6 py-4 w-full h-max'}>
+            <a className="text-3xl lg:text-2xl font-bold">Zahlung via Stripe</a>
             <div className="h-80 text-center grid grid-cols-1 place-items-center">
               <div>
                 <p className="text-cl1 font-light">
@@ -412,14 +213,15 @@ export default function Step2({ res_data }) {
                 </a>
               </div>
             </div>
-            <button
-              className="w-full bg-cl2 p-2 rounded-xl text-lg font-gabriela"
-              onClick={onClick}
+            <form
+              action={`http://localhost:3000/api/checkout?cartid=${cookies.cartid}&userid=${cookies.userid}`}
+              method="POST"
+              className="w-full"
             >
-              {paymentVariant <= 3
-                ? 'Weiter zur Sicherheitsprüfung'
-                : 'Weiter zum Zahlungsdienstleister'}
-            </button>
+              <button className="w-full bg-cl2 p-2 rounded-xl text-lg font-gabriela">
+                {'Weiter zum Zahlungsdienstleister'}
+              </button>
+            </form>
           </div>
         </div>
       </div>
