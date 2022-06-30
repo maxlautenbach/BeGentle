@@ -54,13 +54,10 @@ export default function Userdashboard({ data, rentals }) {
                 </div>
               </div>
             </div>
-            <div
-              id="MyInstruments"
-              className={
-                'mx-7 my-5'
-              }
-            >
-              <ul className='grid grid-cols-1 lg:grid-cols-2 place-items-center'>{rental}</ul>
+            <div id="MyInstruments" className={'mx-7 my-5'}>
+              <ul className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+                {rental}
+              </ul>
             </div>
           </div>
           <div className="hidden sm:flex">
