@@ -9,7 +9,9 @@
     "lint": "next lint",
     "seed": "node prisma/seed.js",
     "reset": "prisma migrate reset && node prisma/seed.js",
-    "cleanbuild": "docker-compose up & yarn install && wait-on tcp:5432 && prisma migrate reset --force && node prisma/seed.js && yarn build && yarn start"
+    "docker": "docker-compose up",
+    "buildstart": "wait-on tcp:5432 && prisma migrate reset --force && node prisma/seed.js && yarn build && yarn start",
+    "cleanbuild": "yarn install && npm-run-all --parallel docker buildstart"
   },
   "dependencies": {
     "@prisma/client": "^3.14.0",
@@ -19,6 +21,7 @@
     "moment": "^2.29.3",
     "next": "12.1.6",
     "nookies": "^2.5.2",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.14",
     "react": "18.1.0",
     "react-cookie": "^4.1.1",
