@@ -10,7 +10,7 @@ export default function Userdashboard({ data, rentals }) {
 
   return (
     <div>
-      <div className="w-screen h-screen bg-cl4 flex flex-col">
+      <div className="w-screen min-h-screen bg-cl4 flex flex-col">
         <Header />
         <div className="flex-grow grid grid-cols-1 place-items-center">
           <div className="w-screen sm:w-11/12 lg:w-5/6 max-w-7xl h-full sm:rounded-xl ">
@@ -21,7 +21,7 @@ export default function Userdashboard({ data, rentals }) {
               <p className="text-sm font-light md:text-xl">
                 Hier findest du alles über deine ausgeliehenen Schätze!
               </p>
-              <div className="w-full flex flex-row my-5 drop-shadow-md overflow-auto ">
+              <div className="w-full flex flex-row md:justify-center my-5 drop-shadow-md overflow-auto ">
                 <div className="bg-cl2 rounded-2xl min-w-[180px] h-28 p-2 mr-5 md:w-3/12 md:h-36 md:mr-8">
                   <p className="text-xs font-semibold md:text-lg">
                     Deine Instrumente
@@ -57,10 +57,10 @@ export default function Userdashboard({ data, rentals }) {
             <div
               id="MyInstruments"
               className={
-                'mx-7 my-5 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 place-items-center'
+                'mx-7 my-5'
               }
             >
-              <ul>{rental}</ul>
+              <ul className='grid grid-cols-1 lg:grid-cols-2 place-items-center'>{rental}</ul>
             </div>
           </div>
           <div className="hidden sm:flex">
